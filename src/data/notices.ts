@@ -1,0 +1,70 @@
+import { Notice } from "@/types/notice";
+
+export const initialNotices: Notice[] = [
+  {
+    id: "not-01",
+    title: "Midterm Examination Schedule Announcement — Fall 2026",
+    content: "The Midterm Examinations for 1st Year 1st Semester (CSE Fall 2026 session) are officially scheduled to begin on October 12, 2026. Detailed seating arrangements and admit card download links will be generated on the student portal by October 5. Programmable calculators and digital smartwatches are strictly prohibited in the exam hall.",
+    author: "Controller of Examinations",
+    authorRole: "Central Examination Cell",
+    date: "2026-09-26",
+    priority: "Urgent",
+    category: "Exam",
+    isPinned: true,
+    attachments: [
+      {
+        name: "CSE_Fall2026_Midterm_Routine_Signed.pdf",
+        url: "#",
+        size: "420 KB",
+      },
+    ],
+  },
+  {
+    id: "not-02",
+    title: "CSE 1102 Structured Programming Sessional Assignment 2 Submission Deadline",
+    content: "All students of Section A and B are instructed to commit and push their Assignment 2 (Student Records Binary Serialization) to their assigned department GitLab repositories by 11:59 PM, Sunday, October 4, 2026. Late submissions will face an automatic 20% mark deduction per 24 hours.",
+    author: "Prof. Dr. Mohammad Rashedul Islam",
+    authorRole: "Head, Dept of CSE",
+    date: "2026-09-28",
+    priority: "Important",
+    category: "Academic",
+    isPinned: true,
+  },
+  {
+    id: "not-03",
+    title: "DLD Lab Workstation Maintenance on Thursday Morning",
+    content: "Hardware & Digital Logic Design Lab (Academic Bldg 2) will undergo firmware updates and digital trainer board calibration on Thursday, October 1, from 08:00 AM to 01:00 PM. The 10:00 AM lab consultation hour will be held in faculty office Room 712 instead.",
+    author: "Dr. Shamim Ahmed",
+    authorRole: "Lab In-Charge, DLD Lab",
+    date: "2026-09-27",
+    priority: "Normal",
+    category: "Class Schedule",
+  },
+  {
+    id: "not-04",
+    title: "Call for Submissions: Intra-Department Programming Contest 2026",
+    content: "The AUST CSE Society cordially invites all freshers from the Fall 2026 batch to participate in the upcoming Intra-Department ICPC-style programming contest on October 25. Registration is completely free and top 10 finishers will qualify directly for the university competitive programming camp.",
+    author: "AUST CSE Society",
+    authorRole: "Student Affairs Committee",
+    date: "2026-09-24",
+    priority: "Normal",
+    category: "Extracurricular",
+    attachments: [
+      {
+        name: "IntraCSE_2026_Rules_and_Platform_Guide.pdf",
+        url: "#",
+        size: "610 KB",
+      },
+    ],
+  },
+  {
+    id: "not-05",
+    title: "Semester Final Exam Registration & Fee Clearance Reminder",
+    content: "Notice is hereby given to all students to verify that their semester tuition clearance is up to date before October 20. Incomplete registrations will result in withholding of semester final admit cards.",
+    author: "Academic Registrar",
+    authorRole: "Office of the Registrar",
+    date: "2026-09-20",
+    priority: "Important",
+    category: "Administrative",
+  },
+];

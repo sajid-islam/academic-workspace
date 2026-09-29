@@ -1,0 +1,15 @@
+export const WORKSPACE_CONFIG = {
+  name: "CSE Workspace",
+  university: "Ahsanullah University of Science & Technology",
+  shortUniversity: "AUST",
+  department: "Computer Science & Engineering",
+  departmentShort: "CSE",
+  session: "Fall 2026",
+  batch: "48th Batch",
+  semester: "1st Year, 1st Semester",
+  academicYear: "2026",
+  currentTerm: "Mid-Term Cycle",
+  totalStudents: 120,
+  activeSubjectsCount: 6,
+  portalVersion: "v1.2.0-preview",
+};

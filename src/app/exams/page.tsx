@@ -1,20 +1,12 @@
 "use client";
 
-import * as React from "react";
-import {
-  ClockAfternoon,
-  CalendarBlank,
-  MapPin,
-  CheckCircle,
-  DownloadSimple,
-  Timer,
-  WarningCircle,
-} from "@phosphor-icons/react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useWorkspace } from "@/context/workspace-context";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
+import { CheckCircle, ClockAfternoon, DownloadSimple, MapPin, Timer } from "@phosphor-icons/react";
+import * as React from "react";
 
 export default function ExamsPage() {
   const { exams, subjects } = useWorkspace();
@@ -26,11 +18,7 @@ export default function ExamsPage() {
   const pastExams = exams.filter((e) => e.isPast);
 
   const displayedExams =
-    activeTab === "upcoming"
-      ? upcomingExams
-      : activeTab === "past"
-      ? pastExams
-      : exams;
+    activeTab === "upcoming" ? upcomingExams : activeTab === "past" ? pastExams : exams;
 
   return (
     <div className="space-y-6 animate-in fade-in-50 duration-300">
@@ -102,7 +90,7 @@ export default function ExamsPage() {
               const subject = subjects.find((s) => s.id === exam.subjectId);
               const daysDiff = Math.ceil(
                 (new Date(exam.date).getTime() - new Date("2026-09-29").getTime()) /
-                  (1000 * 60 * 60 * 24)
+                  (1000 * 60 * 60 * 24),
               );
 
               return (
@@ -131,7 +119,7 @@ export default function ExamsPage() {
                         <span className="text-xl leading-none mt-0.5">
                           {new Date(exam.date).getDate()}
                         </span>
-                        <span className="text-[9px] font-mono text-muted-foreground">
+                        <span className="text-[9px] text-muted-foreground">
                           {new Date(exam.date).getFullYear()}
                         </span>
                       </div>
@@ -139,16 +127,14 @@ export default function ExamsPage() {
                       {/* Subject and exam info */}
                       <div className="min-w-0">
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-xs font-bold text-primary">
-                            {subject?.code}
-                          </span>
+                          <span className="text-xs font-bold text-primary">{subject?.code}</span>
                           <Badge
                             variant={
                               exam.examType === "Final"
                                 ? "destructive"
                                 : exam.examType === "Midterm"
-                                ? "warning"
-                                : "secondary"
+                                  ? "warning"
+                                  : "secondary"
                             }
                             className="text-[10px]"
                           >

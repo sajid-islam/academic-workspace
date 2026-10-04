@@ -1,7 +1,7 @@
 export const WORKSPACE_CONFIG = {
   name: "CSE Workspace",
-  university: "Ahsanullah University of Science & Technology",
-  shortUniversity: "AUST",
+  university: "North Western University, Khulna",
+  shortUniversity: "NWU",
   department: "Computer Science & Engineering",
   departmentShort: "CSE",
   session: "Fall 2026",

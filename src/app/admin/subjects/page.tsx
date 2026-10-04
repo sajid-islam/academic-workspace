@@ -1,48 +1,41 @@
 "use client";
 
-import * as React from "react";
-import {
-  Books,
-  Plus,
-  PencilSimple,
-  Trash,
-  MagnifyingGlass,
-  User,
-} from "@phosphor-icons/react";
 import { AdminHeader } from "@/components/admin/admin-header";
 import { DataTablePagination } from "@/components/admin/data-table-pagination";
 import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
-} from "@/components/ui/table";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogAction,
-  AlertDialogCancel,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
 import { Subject } from "@/types/subject";
+import { MagnifyingGlass, PencilSimple, Trash } from "@phosphor-icons/react";
+import * as React from "react";
 
 export default function AdminSubjectsPage() {
   const { subjects, addSubject, updateSubject, deleteSubject } = useWorkspace();
@@ -117,7 +110,7 @@ export default function AdminSubjectsPage() {
       teacher: {
         name: form.teacherName || "Assigned Lecturer",
         designation: form.teacherDesignation,
-        email: form.teacherEmail || "faculty.cse@aust.edu",
+        email: form.teacherEmail || "faculty.cse@nwu.edu",
         officeRoom: "Room 702, CSE Bldg",
       },
       room: form.room,
@@ -241,12 +234,8 @@ export default function AdminSubjectsPage() {
           <TableBody>
             {paginated.map((sub) => (
               <TableRow key={sub.id}>
-                <TableCell className="font-mono text-xs font-bold text-primary">
-                  {sub.code}
-                </TableCell>
-                <TableCell className="font-semibold text-xs text-foreground">
-                  {sub.name}
-                </TableCell>
+                <TableCell className="text-xs font-bold text-primary">{sub.code}</TableCell>
+                <TableCell className="font-semibold text-xs text-foreground">{sub.name}</TableCell>
                 <TableCell className="text-xs">{sub.credit.toFixed(1)}</TableCell>
                 <TableCell>
                   <Badge variant="outline" className="text-[10px]">
@@ -256,7 +245,9 @@ export default function AdminSubjectsPage() {
                 <TableCell className="text-xs">
                   <div className="flex flex-col">
                     <span className="font-medium text-foreground">{sub.teacher.name}</span>
-                    <span className="text-[10px] text-muted-foreground">{sub.teacher.designation}</span>
+                    <span className="text-[10px] text-muted-foreground">
+                      {sub.teacher.designation}
+                    </span>
                   </div>
                 </TableCell>
                 <TableCell className="text-xs text-muted-foreground">{sub.room}</TableCell>
@@ -430,14 +421,16 @@ export default function AdminSubjectsPage() {
           <AlertDialogHeader>
             <AlertDialogTitle>Remove Course Subject?</AlertDialogTitle>
             <AlertDialogDescription className="text-xs">
-              Are you sure you want to remove <strong>{deletingSubject?.code}: {deletingSubject?.name}</strong>?
+              Are you sure you want to remove{" "}
+              <strong>
+                {deletingSubject?.code}: {deletingSubject?.name}
+              </strong>
+              ?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmDelete}>
-              Delete Course
-            </AlertDialogAction>
+            <AlertDialogAction onClick={handleConfirmDelete}>Delete Course</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

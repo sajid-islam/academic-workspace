@@ -1,24 +1,21 @@
 "use client";
 
-import * as React from "react";
+import { getResourceIcon } from "@/components/dashboard/recent-resources";
+import { AddResourceDialog } from "@/components/resources/add-resource-dialog";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
 import {
-  FolderSimpleStar,
-  Plus,
-  MagnifyingGlass,
   ArrowSquareOut,
   BookmarkSimple,
   Copy,
-  Tag,
-  Check,
+  FolderSimpleStar,
+  MagnifyingGlass,
+  Plus,
 } from "@phosphor-icons/react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
-import { useToast } from "@/components/ui/toast";
-import { AddResourceDialog } from "@/components/resources/add-resource-dialog";
-import { getResourceIcon } from "@/components/dashboard/recent-resources";
-import { ResourceType } from "@/types/resource";
+import * as React from "react";
 
 export default function ResourcesPage() {
   const { resources, subjects, isBookmarked, toggleBookmark } = useWorkspace();
@@ -40,10 +37,8 @@ export default function ResourcesPage() {
 
   const filteredResources = React.useMemo(() => {
     return resources.filter((res) => {
-      const matchesSubject =
-        selectedSubject === "all" || res.subjectId === selectedSubject;
-      const matchesType =
-        selectedType === "all" || res.type === selectedType;
+      const matchesSubject = selectedSubject === "all" || res.subjectId === selectedSubject;
+      const matchesType = selectedType === "all" || res.type === selectedType;
 
       const subject = subjects.find((s) => s.id === res.subjectId);
       const query = searchQuery.toLowerCase().trim();
@@ -159,9 +154,7 @@ export default function ResourcesPage() {
                       <div className="size-7 rounded-md bg-muted flex items-center justify-center shrink-0 border border-border/50">
                         {getResourceIcon(res.type)}
                       </div>
-                      <span className="text-xs font-mono font-bold text-primary">
-                        {subject?.code}
-                      </span>
+                      <span className="text-xs font-bold text-primary">{subject?.code}</span>
                       <Badge variant="outline" className="text-[10px] capitalize">
                         {res.type}
                       </Badge>
@@ -178,10 +171,7 @@ export default function ResourcesPage() {
                       className="p-1 rounded text-muted-foreground hover:text-primary transition-colors"
                       aria-label="Bookmark resource"
                     >
-                      <BookmarkSimple
-                        className="size-4"
-                        weight={bookmarked ? "fill" : "regular"}
-                      />
+                      <BookmarkSimple className="size-4" weight={bookmarked ? "fill" : "regular"} />
                     </button>
                   </div>
 
@@ -212,9 +202,7 @@ export default function ResourcesPage() {
                 </div>
 
                 <div className="pt-3 mt-3 border-t border-border/50 flex items-center justify-between text-[11px] text-muted-foreground">
-                  <span className="truncate">
-                    Added by {res.addedBy}
-                  </span>
+                  <span className="truncate">Added by {res.addedBy}</span>
 
                   <div className="flex items-center gap-1.5 shrink-0">
                     <button
@@ -246,11 +234,10 @@ export default function ResourcesPage() {
           <div className="size-12 rounded-xl bg-muted flex items-center justify-center text-muted-foreground mb-3">
             <FolderSimpleStar className="size-6" />
           </div>
-          <h3 className="text-base font-semibold text-foreground">
-            No resources found
-          </h3>
+          <h3 className="text-base font-semibold text-foreground">No resources found</h3>
           <p className="text-xs text-muted-foreground max-w-sm mt-1 leading-relaxed">
-            Try adjusting your search query, clearing filters, or submit a recommended resource for this course.
+            Try adjusting your search query, clearing filters, or submit a recommended resource for
+            this course.
           </p>
           <div className="mt-4 flex items-center gap-2">
             <Button

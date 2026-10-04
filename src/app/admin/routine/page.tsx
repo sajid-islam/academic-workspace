@@ -1,48 +1,41 @@
 "use client";
 
-import * as React from "react";
-import {
-  CalendarDots,
-  Plus,
-  Trash,
-  Clock,
-  MapPin,
-  User,
-} from "@phosphor-icons/react";
 import { AdminHeader } from "@/components/admin/admin-header";
 import { DataTablePagination } from "@/components/admin/data-table-pagination";
 import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
-} from "@/components/ui/table";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogAction,
-  AlertDialogCancel,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
 import { ClassSlot, DayOfWeek } from "@/types/routine";
+import { Trash } from "@phosphor-icons/react";
+import * as React from "react";
 
 export default function AdminRoutinePage() {
   const { routine, subjects, addRoutineSlot, deleteRoutineSlot } = useWorkspace();
@@ -157,12 +150,12 @@ export default function AdminRoutinePage() {
                   <TableCell className="font-semibold text-xs text-foreground">
                     {slot.day}
                   </TableCell>
-                  <TableCell className="font-mono text-xs text-primary">
+                  <TableCell className="text-xs text-primary">
                     {slot.startTime} – {slot.endTime}
                   </TableCell>
                   <TableCell>
                     <div className="flex flex-col">
-                      <span className="font-mono text-xs font-bold">{sub?.code}</span>
+                      <span className="text-xs font-bold">{sub?.code}</span>
                       <span className="text-[11px] text-muted-foreground">{sub?.name}</span>
                     </div>
                   </TableCell>
@@ -306,22 +299,18 @@ export default function AdminRoutinePage() {
       </Dialog>
 
       {/* Delete Confirmation */}
-      <AlertDialog
-        open={Boolean(deletingSlot)}
-        onOpenChange={(o) => !o && setDeletingSlot(null)}
-      >
+      <AlertDialog open={Boolean(deletingSlot)} onOpenChange={(o) => !o && setDeletingSlot(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Remove Class Slot?</AlertDialogTitle>
             <AlertDialogDescription className="text-xs">
-              Are you sure you want to remove this timetable slot on {deletingSlot?.day} ({deletingSlot?.startTime})?
+              Are you sure you want to remove this timetable slot on {deletingSlot?.day} (
+              {deletingSlot?.startTime})?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmDelete}>
-              Delete Slot
-            </AlertDialogAction>
+            <AlertDialogAction onClick={handleConfirmDelete}>Delete Slot</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

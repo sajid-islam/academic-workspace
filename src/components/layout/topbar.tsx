@@ -1,36 +1,33 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import {
-  MagnifyingGlass,
-  Bell,
-  Sun,
-  Moon,
-  Laptop,
-  SignOut,
-  User,
-  GearSix,
-  ShieldCheck,
-  CheckCircle,
-  WarningCircle,
-  List,
-} from "@phosphor-icons/react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuGroup,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
 import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
+import {
+  Bell,
+  GearSix,
+  Laptop,
+  List,
+  MagnifyingGlass,
+  Moon,
+  ShieldCheck,
+  SignOut,
+  Sun,
+  User,
+} from "@phosphor-icons/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const pathTitles: Record<string, { title: string; category?: string }> = {
   "/": { title: "Dashboard", category: "Workspace" },
@@ -104,7 +101,7 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav?: () => void }) {
         >
           <MagnifyingGlass className="size-4 shrink-0" />
           <span className="hidden md:inline">Search anything...</span>
-          <kbd className="hidden sm:inline-flex h-4 items-center gap-0.5 rounded border border-border bg-background px-1 text-[10px] font-mono text-muted-foreground">
+          <kbd className="hidden sm:inline-flex h-4 items-center gap-0.5 rounded border border-border bg-background px-1 text-[10px] text-muted-foreground">
             ⌘K
           </kbd>
         </button>
@@ -246,12 +243,10 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav?: () => void }) {
                 <span className="text-xs font-semibold text-foreground truncate">
                   {student.name}
                 </span>
-                <span className="text-[11px] text-muted-foreground font-mono truncate">
+                <span className="text-[11px] text-muted-foreground truncate">
                   Roll: {student.roll}
                 </span>
-                <span className="text-[10px] text-primary truncate">
-                  CSE · Fall 2026
-                </span>
+                <span className="text-[10px] text-primary truncate">CSE · Fall 2026</span>
               </div>
             </div>
             <DropdownMenuSeparator />

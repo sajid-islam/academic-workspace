@@ -1,41 +1,34 @@
 "use client";
 
-import * as React from "react";
-import {
-  FolderSimpleStar,
-  Plus,
-  Trash,
-  MagnifyingGlass,
-  ArrowSquareOut,
-} from "@phosphor-icons/react";
 import { AdminHeader } from "@/components/admin/admin-header";
 import { DataTablePagination } from "@/components/admin/data-table-pagination";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
-} from "@/components/ui/table";
+import { getResourceIcon } from "@/components/dashboard/recent-resources";
+import { AddResourceDialog } from "@/components/resources/add-resource-dialog";
 import {
   AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogAction,
   AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useToast } from "@/components/ui/toast";
-import { AddResourceDialog } from "@/components/resources/add-resource-dialog";
-import { getResourceIcon } from "@/components/dashboard/recent-resources";
+import { useWorkspace } from "@/context/workspace-context";
 import { Resource } from "@/types/resource";
+import { ArrowSquareOut, MagnifyingGlass, Trash } from "@phosphor-icons/react";
+import * as React from "react";
 
 export default function AdminResourcesPage() {
   const { resources, subjects, deleteResource } = useWorkspace();
@@ -144,9 +137,7 @@ export default function AdminResourcesPage() {
                         {getResourceIcon(res.type)}
                       </div>
                     </TableCell>
-                    <TableCell className="font-mono text-xs font-bold text-primary">
-                      {sub?.code}
-                    </TableCell>
+                    <TableCell className="text-xs font-bold text-primary">{sub?.code}</TableCell>
                     <TableCell>
                       <span className="font-semibold text-xs text-foreground block truncate max-w-[220px]">
                         {res.title}
@@ -163,12 +154,8 @@ export default function AdminResourcesPage() {
                         <ArrowSquareOut className="size-3 shrink-0" />
                       </a>
                     </TableCell>
-                    <TableCell className="text-xs text-muted-foreground">
-                      {res.addedBy}
-                    </TableCell>
-                    <TableCell className="text-xs text-muted-foreground">
-                      {res.date}
-                    </TableCell>
+                    <TableCell className="text-xs text-muted-foreground">{res.addedBy}</TableCell>
+                    <TableCell className="text-xs text-muted-foreground">{res.date}</TableCell>
                     <TableCell className="text-right">
                       <Button
                         size="icon-xs"
@@ -217,9 +204,7 @@ export default function AdminResourcesPage() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmDelete}>
-              Delete Resource
-            </AlertDialogAction>
+            <AlertDialogAction onClick={handleConfirmDelete}>Delete Resource</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

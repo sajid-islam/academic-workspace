@@ -1,42 +1,35 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import {
-  FileImage,
-  UploadSimple,
-  Trash,
-  MagnifyingGlass,
-  Eye,
-  Images,
-} from "@phosphor-icons/react";
 import { AdminHeader } from "@/components/admin/admin-header";
 import { DataTablePagination } from "@/components/admin/data-table-pagination";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
-} from "@/components/ui/table";
+import { AddPaperDialog } from "@/components/question-papers/add-paper-dialog";
 import {
   AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogAction,
   AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useToast } from "@/components/ui/toast";
-import { AddPaperDialog } from "@/components/question-papers/add-paper-dialog";
+import { useWorkspace } from "@/context/workspace-context";
 import { QuestionPaper } from "@/types/question-paper";
+import { Eye, Images, MagnifyingGlass, Trash } from "@phosphor-icons/react";
+import Link from "next/link";
+import * as React from "react";
 
 export default function AdminQuestionPapersPage() {
   const { questionPapers, subjects, deleteQuestionPaper } = useWorkspace();
@@ -156,9 +149,7 @@ export default function AdminQuestionPapersPage() {
                         />
                       </Link>
                     </TableCell>
-                    <TableCell className="font-mono text-xs font-bold text-primary">
-                      {sub?.code}
-                    </TableCell>
+                    <TableCell className="text-xs font-bold text-primary">{sub?.code}</TableCell>
                     <TableCell>
                       <div className="flex flex-col">
                         <span className="font-semibold text-xs text-foreground">
@@ -170,7 +161,7 @@ export default function AdminQuestionPapersPage() {
                       </div>
                     </TableCell>
                     <TableCell className="text-xs">
-                      <div className="flex items-center gap-1 font-mono text-muted-foreground">
+                      <div className="flex items-center gap-1 text-muted-foreground">
                         <Images className="size-3.5" />
                         <span>{paper.pagesCount} pages</span>
                       </div>
@@ -231,23 +222,18 @@ export default function AdminQuestionPapersPage() {
 
       <AddPaperDialog open={isAddOpen} onOpenChange={setIsAddOpen} />
 
-      <AlertDialog
-        open={Boolean(deletingPaper)}
-        onOpenChange={(o) => !o && setDeletingPaper(null)}
-      >
+      <AlertDialog open={Boolean(deletingPaper)} onOpenChange={(o) => !o && setDeletingPaper(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Question Paper?</AlertDialogTitle>
             <AlertDialogDescription className="text-xs">
-              Are you sure you want to permanently delete{" "}
-              <strong>{deletingPaper?.title}</strong>? This action will remove all {deletingPaper?.pagesCount} associated images.
+              Are you sure you want to permanently delete <strong>{deletingPaper?.title}</strong>?
+              This action will remove all {deletingPaper?.pagesCount} associated images.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmDelete}>
-              Delete Paper
-            </AlertDialogAction>
+            <AlertDialogAction onClick={handleConfirmDelete}>Delete Paper</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

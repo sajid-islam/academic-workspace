@@ -1,49 +1,42 @@
 "use client";
 
-import * as React from "react";
-import {
-  Student as StudentIcon,
-  Plus,
-  PencilSimple,
-  Trash,
-  MagnifyingGlass,
-  CheckCircle,
-} from "@phosphor-icons/react";
 import { AdminHeader } from "@/components/admin/admin-header";
 import { DataTablePagination } from "@/components/admin/data-table-pagination";
 import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
-} from "@/components/ui/table";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogAction,
-  AlertDialogCancel,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useWorkspace } from "@/context/workspace-context";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
 import { Student } from "@/types/student";
+import { MagnifyingGlass, PencilSimple, Trash } from "@phosphor-icons/react";
+import * as React from "react";
 
 export default function AdminStudentsPage() {
   const { students, addStudent, updateStudent, deleteStudent } = useWorkspace();
@@ -107,13 +100,13 @@ export default function AdminStudentsPage() {
       id: `std-${Date.now().toString(36)}`,
       roll: formData.roll,
       name: formData.name,
-      email: formData.email || `${formData.roll.toLowerCase()}@aust.edu`,
+      email: formData.email || `${formData.roll.toLowerCase()}@nwu.edu`,
       phone: formData.phone,
       department: "Computer Science & Engineering",
       session: "Fall 2026",
       section: formData.section,
       avatarUrl: `https://images.unsplash.com/photo-${Math.floor(
-        Math.random() * 50 + 1500000000000
+        Math.random() * 50 + 1500000000000,
       )}?w=150&auto=format&fit=crop&q=80`,
       joinedDate: "July 2026",
       role: formData.role,
@@ -241,14 +234,10 @@ export default function AdminStudentsPage() {
                         <AvatarImage src={std.avatarUrl} alt={std.name} />
                         <AvatarFallback>{std.name.charAt(0)}</AvatarFallback>
                       </Avatar>
-                      <span className="font-semibold text-foreground text-xs">
-                        {std.name}
-                      </span>
+                      <span className="font-semibold text-foreground text-xs">{std.name}</span>
                     </div>
                   </TableCell>
-                  <TableCell className="font-mono text-xs font-semibold text-primary">
-                    {std.roll}
-                  </TableCell>
+                  <TableCell className="text-xs font-semibold text-primary">{std.roll}</TableCell>
                   <TableCell className="text-xs">Sec {std.section}</TableCell>
                   <TableCell className="text-xs text-muted-foreground truncate max-w-[180px]">
                     {std.email}
@@ -443,9 +432,7 @@ export default function AdminStudentsPage() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmDelete}>
-              Remove Student
-            </AlertDialogAction>
+            <AlertDialogAction onClick={handleConfirmDelete}>Remove Student</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

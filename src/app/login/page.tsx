@@ -1,31 +1,29 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import {
-  GraduationCap,
-  LockKey,
-  EnvelopeSimple,
-  User,
-  Hash,
-  ArrowRight,
-  ShieldCheck,
-  CheckCircle,
-} from "@phosphor-icons/react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/toast";
 import { WORKSPACE_CONFIG } from "@/lib/constants";
+import {
+  ArrowRight,
+  CheckCircle,
+  EnvelopeSimple,
+  GraduationCap,
+  Hash,
+  LockKey,
+  User,
+} from "@phosphor-icons/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import * as React from "react";
 
 export default function LoginPage() {
   const router = useRouter();
   const { toast } = useToast();
 
   const [mode, setMode] = React.useState<"login" | "register">("login");
-  const [email, setEmail] = React.useState("sajidul.cse26@aust.edu");
+  const [email, setEmail] = React.useState("sajidul.cse26@nwu.edu");
   const [password, setPassword] = React.useState("••••••••••");
   const [rememberMe, setRememberMe] = React.useState(true);
 
@@ -65,7 +63,7 @@ export default function LoginPage() {
   };
 
   const handleQuickLogin = () => {
-    setEmail("sajidul.cse26@aust.edu");
+    setEmail("sajidul.cse26@nwu.edu");
     setPassword("password123");
     toast({
       title: "Authenticated as Sajidul Islam",
@@ -91,9 +89,7 @@ export default function LoginPage() {
           <p className="text-xs text-muted-foreground mt-0.5">
             {WORKSPACE_CONFIG.department} · {WORKSPACE_CONFIG.session}
           </p>
-          <p className="text-[11px] text-muted-foreground/80">
-            {WORKSPACE_CONFIG.university}
-          </p>
+          <p className="text-[11px] text-muted-foreground/80">{WORKSPACE_CONFIG.university}</p>
         </div>
       </div>
 
@@ -129,14 +125,12 @@ export default function LoginPage() {
           /* Sign In Form */
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-foreground">
-                Institutional Email
-              </label>
+              <label className="text-xs font-semibold text-foreground">Institutional Email</label>
               <div className="relative">
                 <EnvelopeSimple className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                 <Input
                   type="email"
-                  placeholder="roll.cse26@aust.edu"
+                  placeholder="roll.cse26@nwu.edu"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -147,9 +141,7 @@ export default function LoginPage() {
 
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-semibold text-foreground">
-                  Password
-                </label>
+                <label className="text-xs font-semibold text-foreground">Password</label>
                 <button
                   type="button"
                   onClick={() =>
@@ -212,9 +204,7 @@ export default function LoginPage() {
           /* Registration Form */
           <form onSubmit={handleRegister} className="space-y-3.5">
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-foreground">
-                Full Name
-              </label>
+              <label className="text-xs font-semibold text-foreground">Full Name</label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                 <Input
@@ -229,9 +219,7 @@ export default function LoginPage() {
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-foreground">
-                  Student Roll #
-                </label>
+                <label className="text-xs font-semibold text-foreground">Student Roll #</label>
                 <div className="relative">
                   <Hash className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                   <Input
@@ -245,9 +233,7 @@ export default function LoginPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-foreground">
-                  Section
-                </label>
+                <label className="text-xs font-semibold text-foreground">Section</label>
                 <select
                   value={regSection}
                   onChange={(e) => setRegSection(e.target.value)}
@@ -260,14 +246,12 @@ export default function LoginPage() {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-foreground">
-                Institutional Email
-              </label>
+              <label className="text-xs font-semibold text-foreground">Institutional Email</label>
               <div className="relative">
                 <EnvelopeSimple className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                 <Input
                   type="email"
-                  placeholder="name.cse26@aust.edu"
+                  placeholder="name.cse26@nwu.edu"
                   value={regEmail}
                   onChange={(e) => setRegEmail(e.target.value)}
                   required
@@ -277,9 +261,7 @@ export default function LoginPage() {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-foreground">
-                Create Password
-              </label>
+              <label className="text-xs font-semibold text-foreground">Create Password</label>
               <div className="relative">
                 <LockKey className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                 <Input

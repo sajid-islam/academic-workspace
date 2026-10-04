@@ -1,42 +1,35 @@
 "use client";
 
-import * as React from "react";
-import {
-  BookOpenText,
-  Plus,
-  Trash,
-  MagnifyingGlass,
-  Eye,
-  DownloadSimple,
-} from "@phosphor-icons/react";
 import { AdminHeader } from "@/components/admin/admin-header";
 import { DataTablePagination } from "@/components/admin/data-table-pagination";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
-} from "@/components/ui/table";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogAction,
-  AlertDialogCancel,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
-import { useToast } from "@/components/ui/toast";
 import { AddNoteDialog } from "@/components/notes/add-note-dialog";
 import { NoteViewerDialog } from "@/components/notes/note-viewer-dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
 import { Note } from "@/types/note";
+import { Eye, MagnifyingGlass, Trash } from "@phosphor-icons/react";
+import * as React from "react";
 
 export default function AdminNotesPage() {
   const { notes, subjects, deleteNote } = useWorkspace();
@@ -142,17 +135,13 @@ export default function AdminNotesPage() {
 
                 return (
                   <TableRow key={note.id}>
-                    <TableCell className="font-mono text-xs font-bold text-primary">
-                      {sub?.code}
-                    </TableCell>
+                    <TableCell className="text-xs font-bold text-primary">{sub?.code}</TableCell>
                     <TableCell>
                       <div className="flex flex-col">
                         <span className="font-semibold text-xs text-foreground truncate max-w-[220px]">
                           {note.title}
                         </span>
-                        <span className="text-[11px] text-muted-foreground">
-                          {note.topic}
-                        </span>
+                        <span className="text-[11px] text-muted-foreground">{note.topic}</span>
                       </div>
                     </TableCell>
                     <TableCell>
@@ -166,9 +155,7 @@ export default function AdminNotesPage() {
                     <TableCell className="text-xs">
                       <span className="font-medium text-foreground">{note.author}</span>
                     </TableCell>
-                    <TableCell className="text-xs text-muted-foreground">
-                      {note.date}
-                    </TableCell>
+                    <TableCell className="text-xs text-muted-foreground">{note.date}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-1">
                         <Button
@@ -216,16 +203,9 @@ export default function AdminNotesPage() {
       </div>
 
       <AddNoteDialog open={isAddOpen} onOpenChange={setIsAddOpen} />
-      <NoteViewerDialog
-        note={selectedNote}
-        open={isViewerOpen}
-        onOpenChange={setIsViewerOpen}
-      />
+      <NoteViewerDialog note={selectedNote} open={isViewerOpen} onOpenChange={setIsViewerOpen} />
 
-      <AlertDialog
-        open={Boolean(deletingNote)}
-        onOpenChange={(o) => !o && setDeletingNote(null)}
-      >
+      <AlertDialog open={Boolean(deletingNote)} onOpenChange={(o) => !o && setDeletingNote(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Class Note?</AlertDialogTitle>
@@ -235,9 +215,7 @@ export default function AdminNotesPage() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmDelete}>
-              Delete Note
-            </AlertDialogAction>
+            <AlertDialogAction onClick={handleConfirmDelete}>Delete Note</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

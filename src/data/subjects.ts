@@ -16,9 +16,10 @@ export const initialSubjects: Subject[] = [
     teacher: {
       name: "Prof. Dr. Mohammad Rashedul Islam",
       designation: "Professor & Head",
-      email: "rashedul.cse@aust.edu",
+      email: "rashedul.cse@nwu.edu",
       officeRoom: "Room 704, Dept. of CSE",
-      avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      avatarUrl:
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
     },
     room: "Gallery 302, Academic Bldg 1",
     scheduleSummary: "Sun, Tue (08:30 AM - 09:50 AM)",
@@ -27,19 +28,35 @@ export const initialSubjects: Subject[] = [
       notes: 18,
       resources: 14,
     },
-    description: "Fundamentals of structured programming using C/C++. Covers control structures, modular programming, memory management, pointers, dynamic allocation, structures, and file I/O operations.",
+    description:
+      "Fundamentals of structured programming using C/C++. Covers control structures, modular programming, memory management, pointers, dynamic allocation, structures, and file I/O operations.",
     syllabus: [
       {
         title: "Module 1: Procedural Fundamentals",
-        topics: ["C syntax & compilers", "Data types and expressions", "Conditional logic", "Looping paradigms"],
+        topics: [
+          "C syntax & compilers",
+          "Data types and expressions",
+          "Conditional logic",
+          "Looping paradigms",
+        ],
       },
       {
         title: "Module 2: Memory & Modularization",
-        topics: ["Function calling conventions", "Recursion & call stack", "Arrays and multidimensional indexing", "Pointer arithmetic"],
+        topics: [
+          "Function calling conventions",
+          "Recursion & call stack",
+          "Arrays and multidimensional indexing",
+          "Pointer arithmetic",
+        ],
       },
       {
         title: "Module 3: Advanced Storage & Structures",
-        topics: ["Dynamic memory (malloc/calloc/free)", "Custom structures and unions", "Linked data basics", "Binary & text file streams"],
+        topics: [
+          "Dynamic memory (malloc/calloc/free)",
+          "Custom structures and unions",
+          "Linked data basics",
+          "Binary & text file streams",
+        ],
       },
     ],
   },
@@ -58,9 +75,10 @@ export const initialSubjects: Subject[] = [
     teacher: {
       name: "Dr. Shamim Ahmed",
       designation: "Associate Professor",
-      email: "shamim.ahmed@aust.edu",
+      email: "shamim.ahmed@nwu.edu",
       officeRoom: "Room 712, Academic Bldg 1",
-      avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      avatarUrl:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
     },
     room: "Room 408, Academic Bldg 2",
     scheduleSummary: "Mon, Wed (10:00 AM - 11:20 AM)",
@@ -69,19 +87,35 @@ export const initialSubjects: Subject[] = [
       notes: 15,
       resources: 11,
     },
-    description: "Number systems, Boolean algebra, logic gates, Karnaugh maps, combinational circuits (adders, multiplexers, decoders), and sequential circuits (flip-flops, registers, counters, finite state machines).",
+    description:
+      "Number systems, Boolean algebra, logic gates, Karnaugh maps, combinational circuits (adders, multiplexers, decoders), and sequential circuits (flip-flops, registers, counters, finite state machines).",
     syllabus: [
       {
         title: "Module 1: Boolean Algebra & Gate Minimization",
-        topics: ["Radix conversions & complements", "Boolean theorems & canonical forms", "K-Map 4/5-variable minimization", "Quine-McCluskey method"],
+        topics: [
+          "Radix conversions & complements",
+          "Boolean theorems & canonical forms",
+          "K-Map 4/5-variable minimization",
+          "Quine-McCluskey method",
+        ],
       },
       {
         title: "Module 2: Combinational Logic Networks",
-        topics: ["Full adders, ripple carry, CLA", "Decoders, encoders, priority encoders", "Multiplexers & Demultiplexers", "ALU design blocks"],
+        topics: [
+          "Full adders, ripple carry, CLA",
+          "Decoders, encoders, priority encoders",
+          "Multiplexers & Demultiplexers",
+          "ALU design blocks",
+        ],
       },
       {
         title: "Module 3: Sequential Logic & FSM",
-        topics: ["Latches & Edge-triggered Flip-Flops (SR, JK, D, T)", "Shift registers & synchronous counters", "Mealy vs Moore finite state machines", "State reduction and assignment"],
+        topics: [
+          "Latches & Edge-triggered Flip-Flops (SR, JK, D, T)",
+          "Shift registers & synchronous counters",
+          "Mealy vs Moore finite state machines",
+          "State reduction and assignment",
+        ],
       },
     ],
   },
@@ -100,9 +134,10 @@ export const initialSubjects: Subject[] = [
     teacher: {
       name: "Dr. Nusrat Parveen",
       designation: "Assistant Professor, Dept of Mathematics",
-      email: "nusrat.math@aust.edu",
+      email: "nusrat.math@nwu.edu",
       officeRoom: "Room 502, Science Bldg",
-      avatarUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
+      avatarUrl:
+        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
     },
     room: "Room 402, Academic Bldg 2",
     scheduleSummary: "Mon, Wed (11:30 AM - 12:50 PM)",
@@ -111,19 +146,35 @@ export const initialSubjects: Subject[] = [
       notes: 14,
       resources: 12,
     },
-    description: "Propositional and predicate calculus, mathematical proofs, set theory, relations and functions, graph theory, trees, combinatorics, recurrence relations, and Boolean structures essential for computing.",
+    description:
+      "Propositional and predicate calculus, mathematical proofs, set theory, relations and functions, graph theory, trees, combinatorics, recurrence relations, and Boolean structures essential for computing.",
     syllabus: [
       {
         title: "Module 1: Logic & Proof Techniques",
-        topics: ["Propositional equivalences", "Predicates and quantifiers", "Direct, contrapositive, and contradiction proofs", "Mathematical induction"],
+        topics: [
+          "Propositional equivalences",
+          "Predicates and quantifiers",
+          "Direct, contrapositive, and contradiction proofs",
+          "Mathematical induction",
+        ],
       },
       {
         title: "Module 2: Relations, Functions & Counting",
-        topics: ["Equivalence relations and partial orders", "Injective/surjective functions", "Pigeonhole principle & permutations", "Solving recurrence relations"],
+        topics: [
+          "Equivalence relations and partial orders",
+          "Injective/surjective functions",
+          "Pigeonhole principle & permutations",
+          "Solving recurrence relations",
+        ],
       },
       {
         title: "Module 3: Graph Theory & Trees",
-        topics: ["Eulerian and Hamiltonian graphs", "Planarity and graph coloring", "Spanning trees & traversal algorithms", "Network flows"],
+        topics: [
+          "Eulerian and Hamiltonian graphs",
+          "Planarity and graph coloring",
+          "Spanning trees & traversal algorithms",
+          "Network flows",
+        ],
       },
     ],
   },
@@ -142,9 +193,10 @@ export const initialSubjects: Subject[] = [
     teacher: {
       name: "Engr. Tanvir Mahmud",
       designation: "Assistant Professor, EEE",
-      email: "tanvir.eee@aust.edu",
+      email: "tanvir.eee@nwu.edu",
       officeRoom: "Room 610, EEE Bldg",
-      avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+      avatarUrl:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
     },
     room: "Room 501, Academic Bldg 1",
     scheduleSummary: "Tue, Thu (10:00 AM - 11:20 AM)",
@@ -153,19 +205,35 @@ export const initialSubjects: Subject[] = [
       notes: 11,
       resources: 9,
     },
-    description: "DC and AC circuit laws: Ohm's law, Kirchhoff's laws (KVL, KCL), Node and Mesh analysis, Thevenin's and Norton's theorems, Superposition, maximum power transfer, resonance, phasors, and transient RL/RC analysis.",
+    description:
+      "DC and AC circuit laws: Ohm's law, Kirchhoff's laws (KVL, KCL), Node and Mesh analysis, Thevenin's and Norton's theorems, Superposition, maximum power transfer, resonance, phasors, and transient RL/RC analysis.",
     syllabus: [
       {
         title: "Module 1: DC Resistive Circuits",
-        topics: ["KCL and KVL in multi-loop circuits", "Nodal & Mesh analysis with dependent sources", "Thevenin & Norton equivalent circuits", "Maximum power transfer theorem"],
+        topics: [
+          "KCL and KVL in multi-loop circuits",
+          "Nodal & Mesh analysis with dependent sources",
+          "Thevenin & Norton equivalent circuits",
+          "Maximum power transfer theorem",
+        ],
       },
       {
         title: "Module 2: Transient Analysis & Storage Elements",
-        topics: ["Capacitors & Inductors v-i relationships", "First-order RC and RL transient step responses", "Time constants and energy dissipation", "Second order RLC introduction"],
+        topics: [
+          "Capacitors & Inductors v-i relationships",
+          "First-order RC and RL transient step responses",
+          "Time constants and energy dissipation",
+          "Second order RLC introduction",
+        ],
       },
       {
         title: "Module 3: Sinusoidal AC Circuit Analysis",
-        topics: ["Phasor transformation & impedance", "AC mesh/nodal analysis", "Average and complex power, power factor", "Series and parallel resonance"],
+        topics: [
+          "Phasor transformation & impedance",
+          "AC mesh/nodal analysis",
+          "Average and complex power, power factor",
+          "Series and parallel resonance",
+        ],
       },
     ],
   },
@@ -184,9 +252,10 @@ export const initialSubjects: Subject[] = [
     teacher: {
       name: "Dr. Kazi Mostafa Kamal",
       designation: "Associate Professor, ME",
-      email: "mostafa.me@aust.edu",
+      email: "mostafa.me@nwu.edu",
       officeRoom: "Room 304, Mechanical Workshop Bldg",
-      avatarUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80",
+      avatarUrl:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80",
     },
     room: "Room 405, Academic Bldg 2",
     scheduleSummary: "Sun, Wed (01:00 PM - 02:20 PM)",
@@ -195,19 +264,35 @@ export const initialSubjects: Subject[] = [
       notes: 8,
       resources: 7,
     },
-    description: "Statics of particles and rigid bodies, equilibrium, friction, centroids, moment of inertia. Thermodynamics concepts, first and second laws of thermodynamics, heat engines, Carnot cycle, and refrigeration.",
+    description:
+      "Statics of particles and rigid bodies, equilibrium, friction, centroids, moment of inertia. Thermodynamics concepts, first and second laws of thermodynamics, heat engines, Carnot cycle, and refrigeration.",
     syllabus: [
       {
         title: "Module 1: Statics & Equilibrium",
-        topics: ["Force vectors & equilibrium of particles", "Free-body diagrams of rigid structures", "Friction and impending motion", "Centroids and moments of inertia"],
+        topics: [
+          "Force vectors & equilibrium of particles",
+          "Free-body diagrams of rigid structures",
+          "Friction and impending motion",
+          "Centroids and moments of inertia",
+        ],
       },
       {
         title: "Module 2: First Law of Thermodynamics",
-        topics: ["Thermodynamic systems and boundaries", "Work and heat transfer mechanisms", "Internal energy & enthalpy in closed/open systems", "Steady-flow energy equations"],
+        topics: [
+          "Thermodynamic systems and boundaries",
+          "Work and heat transfer mechanisms",
+          "Internal energy & enthalpy in closed/open systems",
+          "Steady-flow energy equations",
+        ],
       },
       {
         title: "Module 3: Second Law & Thermal Cycles",
-        topics: ["Heat engines & refrigerators", "Kelvin-Planck and Clausius statements", "Carnot theorem and reversible cycles", "Entropy calculations"],
+        topics: [
+          "Heat engines & refrigerators",
+          "Kelvin-Planck and Clausius statements",
+          "Carnot theorem and reversible cycles",
+          "Entropy calculations",
+        ],
       },
     ],
   },
@@ -226,9 +311,10 @@ export const initialSubjects: Subject[] = [
     teacher: {
       name: "Farhana Sultana",
       designation: "Senior Lecturer, Dept of Humanities",
-      email: "farhana.hum@aust.edu",
+      email: "farhana.hum@nwu.edu",
       officeRoom: "Room 415, Humanities Bldg",
-      avatarUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
+      avatarUrl:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
     },
     room: "Language Lab 2, Academic Bldg 1",
     scheduleSummary: "Thu (08:30 AM - 10:30 AM)",
@@ -237,15 +323,26 @@ export const initialSubjects: Subject[] = [
       notes: 10,
       resources: 8,
     },
-    description: "Technical writing principles, engineering report structuring, scientific documentation, research paper abstracts, formal presentations, CV/resume development, and interpersonal communication in engineering teams.",
+    description:
+      "Technical writing principles, engineering report structuring, scientific documentation, research paper abstracts, formal presentations, CV/resume development, and interpersonal communication in engineering teams.",
     syllabus: [
       {
         title: "Module 1: Technical Writing Mechanics",
-        topics: ["Conciseness and clarity in technical prose", "Audience analysis and technical tone", "Document formatting & citations", "Executive summaries"],
+        topics: [
+          "Conciseness and clarity in technical prose",
+          "Audience analysis and technical tone",
+          "Document formatting & citations",
+          "Executive summaries",
+        ],
       },
       {
         title: "Module 2: Professional Communication",
-        topics: ["Formal email correspondence", "Engineering progress reports", "Technical proposals", "Presentation slide structuring"],
+        topics: [
+          "Formal email correspondence",
+          "Engineering progress reports",
+          "Technical proposals",
+          "Presentation slide structuring",
+        ],
       },
     ],
   },

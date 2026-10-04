@@ -1,19 +1,16 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import {
-  Books,
-  FileImage,
-  BookOpenText,
-  FolderSimpleStar,
-  User,
-  ArrowRight,
-  Clock,
-  MapPin,
-} from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
 import { useWorkspace } from "@/context/workspace-context";
+import {
+  ArrowRight,
+  BookOpenText,
+  FileImage,
+  FolderSimpleStar,
+  MapPin,
+  User,
+} from "@phosphor-icons/react";
+import Link from "next/link";
 
 export default function SubjectsPage() {
   const { subjects, questionPapers, notes, resources } = useWorkspace();
@@ -58,9 +55,7 @@ export default function SubjectsPage() {
                 {/* Top Code Badge & Credits */}
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-sm font-bold text-primary">
-                      {subject.code}
-                    </span>
+                    <span className="text-sm font-bold text-primary">{subject.code}</span>
                     <Badge variant="outline" className="text-[10px]">
                       {subject.type}
                     </Badge>

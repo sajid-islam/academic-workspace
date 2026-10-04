@@ -1,30 +1,26 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
+import { cn } from "@/lib/utils";
 import {
-  MagnifyingGlassPlus,
-  MagnifyingGlassMinus,
-  ArrowsClockwise,
-  ArrowsOut,
-  ArrowsIn,
-  DownloadSimple,
   Archive,
+  ArrowLeft,
+  ArrowsClockwise,
+  ArrowsIn,
+  ArrowsOut,
+  BookmarkSimple,
   CaretLeft,
   CaretRight,
-  BookmarkSimple,
-  ArrowLeft,
+  DownloadSimple,
   Images,
-  Eye,
-  CalendarBlank,
-  User,
-  Hash,
+  MagnifyingGlassMinus,
+  MagnifyingGlassPlus,
 } from "@phosphor-icons/react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
-import { useToast } from "@/components/ui/toast";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import * as React from "react";
 
 interface QuestionPaperViewerProps {
   paperId: string;
@@ -108,7 +104,7 @@ export function QuestionPaperViewer({ paperId }: QuestionPaperViewerProps) {
       ref={containerRef}
       className={cn(
         "flex flex-col space-y-4 animate-in fade-in-50 duration-300",
-        isFullscreen && "bg-background p-4 h-screen fixed inset-0 z-50 overflow-hidden"
+        isFullscreen && "bg-background p-4 h-screen fixed inset-0 z-50 overflow-hidden",
       )}
     >
       {/* Top Header & Actions Bar */}
@@ -125,9 +121,7 @@ export function QuestionPaperViewer({ paperId }: QuestionPaperViewerProps) {
               <Badge variant="default" className="text-[10px]">
                 {paper.examType} · {paper.year}
               </Badge>
-              <span className="text-xs font-mono font-bold text-primary">
-                {subject?.code}
-              </span>
+              <span className="text-xs font-bold text-primary">{subject?.code}</span>
               <span className="text-xs text-muted-foreground hidden md:inline truncate">
                 · {subject?.name}
               </span>
@@ -150,7 +144,7 @@ export function QuestionPaperViewer({ paperId }: QuestionPaperViewerProps) {
             >
               <MagnifyingGlassMinus className="size-4" />
             </button>
-            <span className="px-1.5 text-[11px] font-mono font-medium text-foreground select-none">
+            <span className="px-1.5 text-[11px] font-medium text-foreground select-none">
               {Math.round(zoomLevel * 100)}%
             </span>
             <button
@@ -176,11 +170,7 @@ export function QuestionPaperViewer({ paperId }: QuestionPaperViewerProps) {
             className="p-2 rounded-lg border border-border bg-card text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
             title="Toggle Fullscreen"
           >
-            {isFullscreen ? (
-              <ArrowsIn className="size-4" />
-            ) : (
-              <ArrowsOut className="size-4" />
-            )}
+            {isFullscreen ? <ArrowsIn className="size-4" /> : <ArrowsOut className="size-4" />}
           </button>
 
           {/* Bookmark */}
@@ -195,10 +185,7 @@ export function QuestionPaperViewer({ paperId }: QuestionPaperViewerProps) {
             className="p-2 rounded-lg border border-border bg-card text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
             title="Bookmark Paper"
           >
-            <BookmarkSimple
-              className="size-4"
-              weight={bookmarked ? "fill" : "regular"}
-            />
+            <BookmarkSimple className="size-4" weight={bookmarked ? "fill" : "regular"} />
           </button>
 
           {/* Download Current Page */}
@@ -270,7 +257,7 @@ export function QuestionPaperViewer({ paperId }: QuestionPaperViewerProps) {
                   "w-full text-left rounded-lg overflow-hidden border transition-all duration-200 group relative block",
                   activePageIndex === idx
                     ? "border-primary ring-2 ring-primary/20 shadow-xs"
-                    : "border-border/60 hover:border-border opacity-75 hover:opacity-100"
+                    : "border-border/60 hover:border-border opacity-75 hover:opacity-100",
                 )}
               >
                 <div className="relative aspect-[3/4] bg-muted/50 overflow-hidden">
@@ -354,7 +341,7 @@ export function QuestionPaperViewer({ paperId }: QuestionPaperViewerProps) {
             >
               <CaretLeft className="size-4" />
             </button>
-            <span className="text-xs font-mono font-medium text-foreground select-none">
+            <span className="text-xs font-medium text-foreground select-none">
               Page {activePageIndex + 1} of {totalPages}
             </span>
             <button
@@ -376,7 +363,7 @@ export function QuestionPaperViewer({ paperId }: QuestionPaperViewerProps) {
                   "relative w-16 aspect-[3/4] shrink-0 rounded-md overflow-hidden border transition-all",
                   activePageIndex === idx
                     ? "border-primary ring-2 ring-primary/20"
-                    : "border-border/60 opacity-60"
+                    : "border-border/60 opacity-60",
                 )}
               >
                 <img

@@ -1,23 +1,22 @@
 "use client";
 
-import * as React from "react";
-import {
-  BookOpenText,
-  Plus,
-  MagnifyingGlass,
-  BookmarkSimple,
-  DownloadSimple,
-  Eye,
-  FilePdf,
-} from "@phosphor-icons/react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
-import { useToast } from "@/components/ui/toast";
 import { AddNoteDialog } from "@/components/notes/add-note-dialog";
 import { NoteViewerDialog } from "@/components/notes/note-viewer-dialog";
-import { Note, NoteType } from "@/types/note";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
+import { Note } from "@/types/note";
+import {
+  BookmarkSimple,
+  BookOpenText,
+  DownloadSimple,
+  Eye,
+  MagnifyingGlass,
+  Plus,
+} from "@phosphor-icons/react";
+import * as React from "react";
 
 export default function NotesPage() {
   const { notes, subjects, isBookmarked, toggleBookmark } = useWorkspace();
@@ -35,10 +34,8 @@ export default function NotesPage() {
   const filteredNotes = React.useMemo(() => {
     return notes
       .filter((note) => {
-        const matchesSubject =
-          selectedSubject === "all" || note.subjectId === selectedSubject;
-        const matchesType =
-          selectedType === "all" || note.type === selectedType;
+        const matchesSubject = selectedSubject === "all" || note.subjectId === selectedSubject;
+        const matchesType = selectedType === "all" || note.type === selectedType;
 
         const subject = subjects.find((s) => s.id === note.subjectId);
         const query = searchQuery.toLowerCase().trim();
@@ -89,7 +86,8 @@ export default function NotesPage() {
             Class Notes & Summaries
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
-            High-yield lecture summaries, handwritten cheat sheets, and lab guides contributed by students.
+            High-yield lecture summaries, handwritten cheat sheets, and lab guides contributed by
+            students.
           </p>
         </div>
 
@@ -168,9 +166,7 @@ export default function NotesPage() {
                 <div>
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-mono font-bold text-primary">
-                        {subject?.code}
-                      </span>
+                      <span className="text-xs font-bold text-primary">{subject?.code}</span>
                       <Badge variant="secondary" className="text-[10px]">
                         {note.type}
                       </Badge>
@@ -187,10 +183,7 @@ export default function NotesPage() {
                       className="p-1 rounded text-muted-foreground hover:text-primary transition-colors"
                       aria-label="Bookmark note"
                     >
-                      <BookmarkSimple
-                        className="size-4"
-                        weight={bookmarked ? "fill" : "regular"}
-                      />
+                      <BookmarkSimple className="size-4" weight={bookmarked ? "fill" : "regular"} />
                     </button>
                   </div>
 
@@ -251,11 +244,10 @@ export default function NotesPage() {
           <div className="size-12 rounded-xl bg-muted flex items-center justify-center text-muted-foreground mb-3">
             <BookOpenText className="size-6" />
           </div>
-          <h3 className="text-base font-semibold text-foreground">
-            No notes found
-          </h3>
+          <h3 className="text-base font-semibold text-foreground">No notes found</h3>
           <p className="text-xs text-muted-foreground max-w-sm mt-1 leading-relaxed">
-            Try adjusting your search query, clearing filters, or contribute the first note for this subject.
+            Try adjusting your search query, clearing filters, or contribute the first note for this
+            subject.
           </p>
           <div className="mt-4 flex items-center gap-2">
             <Button
@@ -280,11 +272,7 @@ export default function NotesPage() {
       <AddNoteDialog open={isAddOpen} onOpenChange={setIsAddOpen} />
 
       {/* Note Reading Modal */}
-      <NoteViewerDialog
-        note={selectedNote}
-        open={isViewerOpen}
-        onOpenChange={setIsViewerOpen}
-      />
+      <NoteViewerDialog note={selectedNote} open={isViewerOpen} onOpenChange={setIsViewerOpen} />
     </div>
   );
 }

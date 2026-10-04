@@ -1,21 +1,12 @@
 "use client";
 
-import * as React from "react";
+import { adminNavigation, studentNavigation } from "@/config/navigation";
+import { useWorkspace } from "@/context/workspace-context";
+import { WORKSPACE_CONFIG } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+import { ArrowSquareOut, GraduationCap, House, ShieldCheck } from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  GraduationCap,
-  ShieldCheck,
-  ArrowSquareOut,
-  Sparkle,
-  Student,
-  House,
-} from "@phosphor-icons/react";
-import { studentNavigation, adminNavigation } from "@/config/navigation";
-import { Badge } from "@/components/ui/badge";
-import { WORKSPACE_CONFIG } from "@/lib/constants";
-import { useWorkspace } from "@/context/workspace-context";
-import { cn } from "@/lib/utils";
 
 interface SidebarProps {
   isAdmin?: boolean;
@@ -38,7 +29,7 @@ export function Sidebar({ isAdmin = false }: SidebarProps) {
             <span className="font-semibold text-sm tracking-tight text-foreground truncate">
               {WORKSPACE_CONFIG.departmentShort} Workspace
             </span>
-            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-primary/10 text-primary font-medium shrink-0">
+            <span className="text-[10px] px-1.5 py-0.2 rounded bg-primary/10 text-primary font-medium shrink-0">
               {isAdmin ? "Admin" : "Fall '26"}
             </span>
           </div>
@@ -70,7 +61,7 @@ export function Sidebar({ isAdmin = false }: SidebarProps) {
                       "flex items-center justify-between px-2.5 py-2 rounded-lg text-xs font-medium transition-colors group relative",
                       isActive
                         ? "bg-sidebar-accent text-sidebar-accent-foreground font-semibold shadow-2xs"
-                        : "text-muted-foreground hover:bg-sidebar-accent/50 hover:text-foreground"
+                        : "text-muted-foreground hover:bg-sidebar-accent/50 hover:text-foreground",
                     )}
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
@@ -79,7 +70,7 @@ export function Sidebar({ isAdmin = false }: SidebarProps) {
                           "size-4 shrink-0 transition-colors",
                           isActive
                             ? "text-primary"
-                            : "text-muted-foreground group-hover:text-foreground"
+                            : "text-muted-foreground group-hover:text-foreground",
                         )}
                         weight={isActive ? "fill" : "regular"}
                       />
@@ -89,10 +80,10 @@ export function Sidebar({ isAdmin = false }: SidebarProps) {
                     {item.badge && (
                       <span
                         className={cn(
-                          "text-[10px] px-1.5 py-0.2 rounded font-mono font-medium",
+                          "text-[10px] px-1.5 py-0.2 rounded font-medium",
                           isActive
                             ? "bg-primary text-primary-foreground"
-                            : "bg-muted text-muted-foreground"
+                            : "bg-muted text-muted-foreground",
                         )}
                       >
                         {item.badge}
@@ -144,10 +135,8 @@ export function Sidebar({ isAdmin = false }: SidebarProps) {
             {student.name.charAt(0)}
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="text-xs font-medium truncate text-foreground">
-              {student.name}
-            </span>
-            <span className="text-[10px] text-muted-foreground font-mono truncate">
+            <span className="text-xs font-medium truncate text-foreground">{student.name}</span>
+            <span className="text-[10px] text-muted-foreground truncate">
               Roll: {student.roll} · Sec {student.section}
             </span>
           </div>

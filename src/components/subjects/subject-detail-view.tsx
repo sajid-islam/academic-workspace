@@ -1,37 +1,30 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
+import { getResourceIcon } from "@/components/dashboard/recent-resources";
+import { AddNoteDialog } from "@/components/notes/add-note-dialog";
+import { NoteViewerDialog } from "@/components/notes/note-viewer-dialog";
+import { AddPaperDialog } from "@/components/question-papers/add-paper-dialog";
+import { AddResourceDialog } from "@/components/resources/add-resource-dialog";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
+import { Note } from "@/types/note";
 import {
-  Books,
-  FileImage,
-  BookOpenText,
-  FolderSimpleStar,
-  User,
-  EnvelopeSimple,
-  MapPin,
-  Clock,
   ArrowLeft,
-  UploadSimple,
-  Plus,
-  Images,
-  BookmarkSimple,
-  Eye,
-  DownloadSimple,
   ArrowSquareOut,
   CheckCircle,
+  Clock,
+  EnvelopeSimple,
+  Images,
+  MapPin,
+  Plus,
+  UploadSimple,
+  User,
 } from "@phosphor-icons/react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
-import { useToast } from "@/components/ui/toast";
-import { AddPaperDialog } from "@/components/question-papers/add-paper-dialog";
-import { AddNoteDialog } from "@/components/notes/add-note-dialog";
-import { AddResourceDialog } from "@/components/resources/add-resource-dialog";
-import { NoteViewerDialog } from "@/components/notes/note-viewer-dialog";
-import { getResourceIcon } from "@/components/dashboard/recent-resources";
-import { Note } from "@/types/note";
+import Link from "next/link";
+import * as React from "react";
 
 interface SubjectDetailViewProps {
   subjectId: string;
@@ -84,7 +77,7 @@ export function SubjectDetailView({ subjectId }: SubjectDetailViewProps) {
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-xs font-bold text-primary px-2 py-0.5 rounded bg-primary/10">
+              <span className="text-xs font-bold text-primary px-2 py-0.5 rounded bg-primary/10">
                 {subject.code}
               </span>
               <Badge variant="outline" className="text-[10px]">
@@ -95,9 +88,7 @@ export function SubjectDetailView({ subjectId }: SubjectDetailViewProps) {
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-bold text-foreground mt-2">
-              {subject.name}
-            </h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground mt-2">{subject.name}</h1>
 
             <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-2xl leading-relaxed">
               {subject.description}
@@ -105,11 +96,7 @@ export function SubjectDetailView({ subjectId }: SubjectDetailViewProps) {
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <Button
-              size="sm"
-              onClick={() => setIsAddPaperOpen(true)}
-              className="gap-1.5 text-xs"
-            >
+            <Button size="sm" onClick={() => setIsAddPaperOpen(true)} className="gap-1.5 text-xs">
               <UploadSimple className="size-3.5" />
               <span>Upload Paper</span>
             </Button>
@@ -124,18 +111,14 @@ export function SubjectDetailView({ subjectId }: SubjectDetailViewProps) {
               <span className="font-semibold text-foreground block truncate">
                 {subject.teacher.name}
               </span>
-              <span className="text-[11px] truncate block">
-                {subject.teacher.designation}
-              </span>
+              <span className="text-[11px] truncate block">{subject.teacher.designation}</span>
             </div>
           </div>
 
           <div className="flex items-center gap-2.5 text-muted-foreground">
             <MapPin className="size-4 text-primary shrink-0" />
             <div className="min-w-0">
-              <span className="font-semibold text-foreground block truncate">
-                {subject.room}
-              </span>
+              <span className="font-semibold text-foreground block truncate">{subject.room}</span>
               <span className="text-[11px] truncate block">
                 Office: {subject.teacher.officeRoom}
               </span>
@@ -194,9 +177,7 @@ export function SubjectDetailView({ subjectId }: SubjectDetailViewProps) {
                     key={i}
                     className="p-4 rounded-xl border border-border/80 bg-card space-y-2.5"
                   >
-                    <h4 className="text-sm font-semibold text-foreground">
-                      {mod.title}
-                    </h4>
+                    <h4 className="text-sm font-semibold text-foreground">{mod.title}</h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {mod.topics.map((t, idx) => (
                         <div
@@ -224,12 +205,8 @@ export function SubjectDetailView({ subjectId }: SubjectDetailViewProps) {
                     {subject.teacher.name.charAt(0)}
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-foreground">
-                      {subject.teacher.name}
-                    </h4>
-                    <p className="text-xs text-muted-foreground">
-                      {subject.teacher.designation}
-                    </p>
+                    <h4 className="text-sm font-bold text-foreground">{subject.teacher.name}</h4>
+                    <p className="text-xs text-muted-foreground">{subject.teacher.designation}</p>
                   </div>
                 </div>
 
@@ -293,7 +270,10 @@ export function SubjectDetailView({ subjectId }: SubjectDetailViewProps) {
                       className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute top-2 left-2">
-                      <Badge variant="default" className="text-[10px] bg-black/75 text-white border-0">
+                      <Badge
+                        variant="default"
+                        className="text-[10px] bg-black/75 text-white border-0"
+                      >
                         {paper.examType} · {paper.year}
                       </Badge>
                     </div>
@@ -460,9 +440,7 @@ export function SubjectDetailView({ subjectId }: SubjectDetailViewProps) {
                       </a>
                     </div>
 
-                    <h4 className="text-sm font-semibold text-foreground mt-2.5">
-                      {res.title}
-                    </h4>
+                    <h4 className="text-sm font-semibold text-foreground mt-2.5">{res.title}</h4>
                     <p className="text-xs text-muted-foreground line-clamp-2 mt-1">
                       {res.description}
                     </p>

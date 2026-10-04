@@ -1,18 +1,10 @@
 "use client";
 
-import * as React from "react";
-import {
-  CalendarDots,
-  Clock,
-  MapPin,
-  User,
-  Funnel,
-  ChalkboardTeacher,
-} from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { useWorkspace } from "@/context/workspace-context";
 import { DayOfWeek } from "@/types/routine";
+import { Clock, MapPin, User } from "@phosphor-icons/react";
+import * as React from "react";
 
 const DAYS: DayOfWeek[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Saturday"];
 
@@ -37,9 +29,7 @@ export default function RoutinePage() {
               Fall 2026 Timetable
             </Badge>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground mt-1">
-            Class Routine
-          </h1>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground mt-1">Class Routine</h1>
           <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
             Weekly class schedules, room allocations, and faculty instructor sessions.
           </p>
@@ -113,9 +103,7 @@ export default function RoutinePage() {
               <span>{day}</span>
               {isToday && (
                 <span
-                  className={`size-1.5 rounded-full ${
-                    isSelected ? "bg-white" : "bg-emerald-500"
-                  }`}
+                  className={`size-1.5 rounded-full ${isSelected ? "bg-white" : "bg-emerald-500"}`}
                 />
               )}
             </button>
@@ -164,9 +152,7 @@ export default function RoutinePage() {
                           className="p-3 rounded-xl border border-border/60 bg-muted/30 hover:border-primary/40 transition-colors"
                         >
                           <div className="flex items-center justify-between gap-1">
-                            <span className="text-xs font-mono font-bold text-primary">
-                              {subject?.code}
-                            </span>
+                            <span className="text-xs font-bold text-primary">{subject?.code}</span>
                             <Badge
                               variant={slot.type === "Lab" ? "secondary" : "outline"}
                               className="text-[10px]"
@@ -182,7 +168,9 @@ export default function RoutinePage() {
                           <div className="space-y-1 mt-2 text-[11px] text-muted-foreground">
                             <div className="flex items-center gap-1.5">
                               <Clock className="size-3 text-muted-foreground/70 shrink-0" />
-                              <span>{slot.startTime} – {slot.endTime}</span>
+                              <span>
+                                {slot.startTime} – {slot.endTime}
+                              </span>
                             </div>
                             <div className="flex items-center gap-1.5 truncate">
                               <MapPin className="size-3 text-muted-foreground/70 shrink-0" />
@@ -207,12 +195,8 @@ export default function RoutinePage() {
         <div className="max-w-2xl mx-auto space-y-4">
           <div className="p-4 rounded-xl border border-border/80 bg-card flex items-center justify-between">
             <div>
-              <h2 className="text-base font-bold text-foreground">
-                {selectedDay} Schedule
-              </h2>
-              <p className="text-xs text-muted-foreground">
-                Detailed timeline for {selectedDay}
-              </p>
+              <h2 className="text-base font-bold text-foreground">{selectedDay} Schedule</h2>
+              <p className="text-xs text-muted-foreground">Detailed timeline for {selectedDay}</p>
             </div>
             {selectedDay === currentDay && (
               <Badge variant="success" className="text-xs">
@@ -233,7 +217,7 @@ export default function RoutinePage() {
                     className="p-5 rounded-xl border border-border/80 bg-card hover:border-primary/50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="flex flex-col items-center justify-center size-12 rounded-xl bg-primary/10 text-primary font-mono font-bold text-xs shrink-0">
+                      <div className="flex flex-col items-center justify-center size-12 rounded-xl bg-primary/10 text-primary font-bold text-xs shrink-0">
                         <span>{slot.startTime.split(" ")[0]}</span>
                         <span className="text-[10px] text-muted-foreground">
                           {slot.startTime.split(" ")[1]}
@@ -242,9 +226,7 @@ export default function RoutinePage() {
 
                       <div className="min-w-0">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-mono font-bold text-primary">
-                            {subject?.code}
-                          </span>
+                          <span className="text-sm font-bold text-primary">{subject?.code}</span>
                           <Badge
                             variant={slot.type === "Lab" ? "secondary" : "outline"}
                             className="text-[10px]"
@@ -271,12 +253,8 @@ export default function RoutinePage() {
                     </div>
 
                     <div className="pt-2 sm:pt-0 sm:border-l sm:pl-4 border-border/60 text-xs text-muted-foreground sm:text-right">
-                      <span className="block font-medium text-foreground">
-                        {slot.teacher}
-                      </span>
-                      <span className="text-[11px] block mt-0.5">
-                        Course Instructor
-                      </span>
+                      <span className="block font-medium text-foreground">{slot.teacher}</span>
+                      <span className="text-[11px] block mt-0.5">Course Instructor</span>
                     </div>
                   </div>
                 );

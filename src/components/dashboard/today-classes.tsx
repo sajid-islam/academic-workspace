@@ -1,10 +1,9 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import { Clock, MapPin, User, ArrowRight, CheckCircle } from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
 import { useWorkspace } from "@/context/workspace-context";
+import { MapPin, User } from "@phosphor-icons/react";
+import Link from "next/link";
 
 export function TodayClasses() {
   const { routine, subjects } = useWorkspace();
@@ -16,12 +15,8 @@ export function TodayClasses() {
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-base font-semibold text-foreground">
-            Today&apos;s Classes
-          </h2>
-          <p className="text-xs text-muted-foreground">
-            Monday schedule · 3 theory sessions
-          </p>
+          <h2 className="text-base font-semibold text-foreground">Today&apos;s Classes</h2>
+          <p className="text-xs text-muted-foreground">Monday schedule · 3 theory sessions</p>
         </div>
         <Link
           href="/routine"
@@ -40,8 +35,8 @@ export function TodayClasses() {
             index === 0
               ? { label: "Completed", variant: "subtle" as const }
               : index === 1
-              ? { label: "Live Now", variant: "success" as const }
-              : { label: "11:30 AM", variant: "warning" as const };
+                ? { label: "Live Now", variant: "success" as const }
+                : { label: "11:30 AM", variant: "warning" as const };
 
           return (
             <div
@@ -49,7 +44,7 @@ export function TodayClasses() {
               className="flex items-center justify-between p-3.5 rounded-xl border border-border/80 bg-card hover:border-primary/40 transition-colors"
             >
               <div className="flex items-center gap-3.5 min-w-0">
-                <div className="flex flex-col items-center justify-center size-10 rounded-lg bg-muted border border-border/60 shrink-0 font-mono text-[11px] font-bold">
+                <div className="flex flex-col items-center justify-center size-10 rounded-lg bg-muted border border-border/60 shrink-0 text-[11px] font-bold">
                   <span>{item.startTime.split(" ")[0]}</span>
                   <span className="text-[9px] text-muted-foreground">
                     {item.startTime.split(" ")[1]}
@@ -58,9 +53,7 @@ export function TodayClasses() {
 
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-foreground">
-                      {subject?.code}
-                    </span>
+                    <span className="text-xs font-bold text-foreground">{subject?.code}</span>
                     <span className="text-xs text-muted-foreground truncate">
                       · {subject?.name}
                     </span>

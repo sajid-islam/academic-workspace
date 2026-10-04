@@ -1,17 +1,10 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import {
-  FileImage,
-  BookmarkSimple,
-  ArrowRight,
-  Eye,
-  Images,
-} from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
 import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
+import { BookmarkSimple, Eye, Images } from "@phosphor-icons/react";
+import Link from "next/link";
 
 export function RecentQuestionPapers() {
   const { questionPapers, subjects, isBookmarked, toggleBookmark } = useWorkspace();
@@ -22,9 +15,7 @@ export function RecentQuestionPapers() {
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-base font-semibold text-foreground">
-            Recent Question Papers
-          </h2>
+          <h2 className="text-base font-semibold text-foreground">Recent Question Papers</h2>
           <p className="text-xs text-muted-foreground">
             Image-only archived exam papers shared by your session
           </p>
@@ -62,14 +53,19 @@ export function RecentQuestionPapers() {
 
                 {/* Overlaid Badges */}
                 <div className="absolute top-2 left-2 flex items-center gap-1">
-                  <Badge variant="default" className="text-[10px] bg-black/75 text-white backdrop-blur-xs border-0">
+                  <Badge
+                    variant="default"
+                    className="text-[10px] bg-black/75 text-white backdrop-blur-xs border-0"
+                  >
                     {paper.examType} · {paper.year}
                   </Badge>
                 </div>
 
                 <div className="absolute bottom-2 right-2 flex items-center gap-1 px-2 py-0.5 rounded bg-black/75 text-white text-[10px] font-medium backdrop-blur-xs">
                   <Images className="size-3" />
-                  <span>{paper.pagesCount} {paper.pagesCount > 1 ? "pages" : "page"}</span>
+                  <span>
+                    {paper.pagesCount} {paper.pagesCount > 1 ? "pages" : "page"}
+                  </span>
                 </div>
               </Link>
 
@@ -77,9 +73,7 @@ export function RecentQuestionPapers() {
               <div className="p-3 flex flex-col justify-between flex-1 gap-2">
                 <div>
                   <div className="flex items-start justify-between gap-1">
-                    <span className="text-[11px] font-mono font-bold text-primary">
-                      {subject?.code}
-                    </span>
+                    <span className="text-[11px] font-bold text-primary">{subject?.code}</span>
                     <button
                       onClick={(e) => {
                         e.preventDefault();
@@ -92,10 +86,7 @@ export function RecentQuestionPapers() {
                       className="text-muted-foreground hover:text-primary transition-colors p-0.5 rounded"
                       aria-label="Bookmark question paper"
                     >
-                      <BookmarkSimple
-                        className="size-4"
-                        weight={bookmarked ? "fill" : "regular"}
-                      />
+                      <BookmarkSimple className="size-4" weight={bookmarked ? "fill" : "regular"} />
                     </button>
                   </div>
 

@@ -1,22 +1,20 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import {
-  MagnifyingGlass,
-  FileImage,
-  BookOpenText,
-  FolderSimpleStar,
-  Books,
-  BellRinging,
-  ArrowRight,
-  X,
-  CornersOut,
-} from "@phosphor-icons/react";
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { useWorkspace } from "@/context/workspace-context";
+import {
+  ArrowRight,
+  BellRinging,
+  BookOpenText,
+  Books,
+  FileImage,
+  FolderSimpleStar,
+  MagnifyingGlass,
+  X,
+} from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
+import * as React from "react";
 
 export function CommandSearchDialog() {
   const router = useRouter();
@@ -46,7 +44,7 @@ export function CommandSearchDialog() {
           p.title?.toLowerCase().includes(cleanQuery) ||
           p.examType.toLowerCase().includes(cleanQuery) ||
           p.year.toString().includes(cleanQuery) ||
-          p.uploadedBy.toLowerCase().includes(cleanQuery)
+          p.uploadedBy.toLowerCase().includes(cleanQuery),
       )
       .slice(0, 3);
   }, [cleanQuery, questionPapers]);
@@ -59,7 +57,7 @@ export function CommandSearchDialog() {
           n.title.toLowerCase().includes(cleanQuery) ||
           n.topic.toLowerCase().includes(cleanQuery) ||
           n.type.toLowerCase().includes(cleanQuery) ||
-          n.author.toLowerCase().includes(cleanQuery)
+          n.author.toLowerCase().includes(cleanQuery),
       )
       .slice(0, 3);
   }, [cleanQuery, notes]);
@@ -72,7 +70,7 @@ export function CommandSearchDialog() {
           r.title.toLowerCase().includes(cleanQuery) ||
           r.type.toLowerCase().includes(cleanQuery) ||
           r.description.toLowerCase().includes(cleanQuery) ||
-          r.tags.some((t) => t.toLowerCase().includes(cleanQuery))
+          r.tags.some((t) => t.toLowerCase().includes(cleanQuery)),
       )
       .slice(0, 3);
   }, [cleanQuery, resources]);
@@ -84,7 +82,7 @@ export function CommandSearchDialog() {
         (s) =>
           s.code.toLowerCase().includes(cleanQuery) ||
           s.name.toLowerCase().includes(cleanQuery) ||
-          s.teacher.name.toLowerCase().includes(cleanQuery)
+          s.teacher.name.toLowerCase().includes(cleanQuery),
       )
       .slice(0, 3);
   }, [cleanQuery, subjects]);
@@ -96,7 +94,7 @@ export function CommandSearchDialog() {
         (nt) =>
           nt.title.toLowerCase().includes(cleanQuery) ||
           nt.content.toLowerCase().includes(cleanQuery) ||
-          nt.category.toLowerCase().includes(cleanQuery)
+          nt.category.toLowerCase().includes(cleanQuery),
       )
       .slice(0, 2);
   }, [cleanQuery, notices]);
@@ -118,7 +116,8 @@ export function CommandSearchDialog() {
       <DialogContent className="p-0 max-w-2xl overflow-hidden gap-0 border-border/80 shadow-2xl">
         <DialogTitle className="sr-only">Search Academic Workspace</DialogTitle>
         <DialogDescription className="sr-only">
-          Search question papers, lecture notes, learning resources, subjects, and department notices
+          Search question papers, lecture notes, learning resources, subjects, and department
+          notices
         </DialogDescription>
 
         {/* Search Input Bar */}
@@ -140,7 +139,7 @@ export function CommandSearchDialog() {
               <X className="size-4" />
             </button>
           ) : (
-            <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+            <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border border-border bg-muted px-1.5 text-[10px] font-medium text-muted-foreground">
               ESC
             </kbd>
           )}
@@ -179,7 +178,8 @@ export function CommandSearchDialog() {
             <div className="py-12 px-4 text-center">
               <p className="text-sm font-medium text-foreground">No matches found</p>
               <p className="text-xs text-muted-foreground mt-1">
-                We couldn&apos;t find anything matching &ldquo;{query}&rdquo;. Try another subject code or keyword.
+                We couldn&apos;t find anything matching &ldquo;{query}&rdquo;. Try another subject
+                code or keyword.
               </p>
             </div>
           )}
@@ -278,9 +278,7 @@ export function CommandSearchDialog() {
                         <p className="text-sm font-medium text-foreground truncate group-hover:text-primary">
                           {res.title}
                         </p>
-                        <p className="text-xs text-muted-foreground truncate">
-                          {res.description}
-                        </p>
+                        <p className="text-xs text-muted-foreground truncate">{res.description}</p>
                       </div>
                     </div>
                     <Badge variant="outline" className="text-[11px] capitalize shrink-0">
@@ -307,7 +305,7 @@ export function CommandSearchDialog() {
                     className="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-muted/70 text-left transition-colors group"
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="size-8 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-mono text-xs font-bold shrink-0">
+                      <div className="size-8 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xs font-bold shrink-0">
                         {sub.code.split(" ")[0]}
                       </div>
                       <div className="min-w-0">
@@ -370,7 +368,8 @@ export function CommandSearchDialog() {
         <div className="flex items-center justify-between px-4 py-2 bg-muted/40 border-t border-border text-[11px] text-muted-foreground">
           <span>Search CSE Fall 2026 Repository</span>
           <span className="flex items-center gap-2">
-            <kbd className="px-1.5 py-0.5 rounded bg-background border border-border">↑↓</kbd> navigate
+            <kbd className="px-1.5 py-0.5 rounded bg-background border border-border">↑↓</kbd>{" "}
+            navigate
             <kbd className="px-1.5 py-0.5 rounded bg-background border border-border">↵</kbd> select
           </span>
         </div>

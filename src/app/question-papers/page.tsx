@@ -1,25 +1,21 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import {
-  FileImage,
-  UploadSimple,
-  MagnifyingGlass,
-  Funnel,
-  BookmarkSimple,
-  Eye,
-  Images,
-  ArrowSquareOut,
-  FolderOpen,
-} from "@phosphor-icons/react";
+import { AddPaperDialog } from "@/components/question-papers/add-paper-dialog";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
 import { useToast } from "@/components/ui/toast";
-import { AddPaperDialog } from "@/components/question-papers/add-paper-dialog";
-import { ExamType } from "@/types/question-paper";
+import { useWorkspace } from "@/context/workspace-context";
+import {
+  BookmarkSimple,
+  Eye,
+  FileImage,
+  Images,
+  MagnifyingGlass,
+  UploadSimple,
+} from "@phosphor-icons/react";
+import Link from "next/link";
+import * as React from "react";
 
 export default function QuestionPapersPage() {
   const { questionPapers, subjects, isBookmarked, toggleBookmark } = useWorkspace();
@@ -36,12 +32,9 @@ export default function QuestionPapersPage() {
   const filteredPapers = React.useMemo(() => {
     return questionPapers
       .filter((paper) => {
-        const matchesSubject =
-          selectedSubject === "all" || paper.subjectId === selectedSubject;
-        const matchesType =
-          selectedExamType === "all" || paper.examType === selectedExamType;
-        const matchesYear =
-          selectedYear === "all" || paper.year.toString() === selectedYear;
+        const matchesSubject = selectedSubject === "all" || paper.subjectId === selectedSubject;
+        const matchesType = selectedExamType === "all" || paper.examType === selectedExamType;
+        const matchesYear = selectedYear === "all" || paper.year.toString() === selectedYear;
 
         const subject = subjects.find((s) => s.id === paper.subjectId);
         const query = searchQuery.toLowerCase().trim();
@@ -95,7 +88,8 @@ export default function QuestionPapersPage() {
             Question Papers
           </h1>
           <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
-            Previous exam papers shared by your session. Every paper is preserved as high-resolution original images.
+            Previous exam papers shared by your session. Every paper is preserved as high-resolution
+            original images.
           </p>
         </div>
 
@@ -199,14 +193,19 @@ export default function QuestionPapersPage() {
 
                   {/* Overlaid Badges */}
                   <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
-                    <Badge variant="default" className="text-[10px] bg-black/80 text-white backdrop-blur-xs border-0">
+                    <Badge
+                      variant="default"
+                      className="text-[10px] bg-black/80 text-white backdrop-blur-xs border-0"
+                    >
                       {paper.examType} · {paper.year}
                     </Badge>
                   </div>
 
                   <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1 px-2 py-0.5 rounded bg-black/80 text-white text-[10px] font-medium backdrop-blur-xs">
                     <Images className="size-3" />
-                    <span>{paper.pagesCount} {paper.pagesCount > 1 ? "pages" : "page"}</span>
+                    <span>
+                      {paper.pagesCount} {paper.pagesCount > 1 ? "pages" : "page"}
+                    </span>
                   </div>
                 </Link>
 
@@ -214,9 +213,7 @@ export default function QuestionPapersPage() {
                 <div className="p-3.5 flex flex-col justify-between flex-1 gap-2.5">
                   <div>
                     <div className="flex items-center justify-between gap-1">
-                      <span className="text-xs font-mono font-bold text-primary">
-                        {subject?.code}
-                      </span>
+                      <span className="text-xs font-bold text-primary">{subject?.code}</span>
                       <button
                         onClick={(e) => {
                           e.preventDefault();
@@ -266,11 +263,10 @@ export default function QuestionPapersPage() {
           <div className="size-12 rounded-xl bg-muted flex items-center justify-center text-muted-foreground mb-3">
             <FileImage className="size-6" />
           </div>
-          <h3 className="text-base font-semibold text-foreground">
-            No question papers found
-          </h3>
+          <h3 className="text-base font-semibold text-foreground">No question papers found</h3>
           <p className="text-xs text-muted-foreground max-w-sm mt-1 leading-relaxed">
-            Try adjusting your search query, clearing filters, or upload the first paper for this course.
+            Try adjusting your search query, clearing filters, or upload the first paper for this
+            course.
           </p>
           <div className="mt-4 flex items-center gap-2">
             <Button

@@ -1,11 +1,10 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import { BookOpenText, BookmarkSimple, DownloadSimple, ArrowRight } from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
 import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
+import { BookOpenText, BookmarkSimple, DownloadSimple } from "@phosphor-icons/react";
+import Link from "next/link";
 
 export function RecentNotes() {
   const { notes, subjects, isBookmarked, toggleBookmark } = useWorkspace();
@@ -45,9 +44,7 @@ export function RecentNotes() {
 
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-foreground">
-                      {subject?.code}
-                    </span>
+                    <span className="text-xs font-bold text-foreground">{subject?.code}</span>
                     <Badge variant="secondary" className="text-[10px]">
                       {note.type}
                     </Badge>
@@ -63,7 +60,9 @@ export function RecentNotes() {
                   <div className="flex items-center gap-3 text-[11px] text-muted-foreground mt-1">
                     <span>By {note.author}</span>
                     <span>·</span>
-                    <span>{note.pages} pages ({note.fileSize})</span>
+                    <span>
+                      {note.pages} pages ({note.fileSize})
+                    </span>
                   </div>
                 </div>
               </div>
@@ -80,10 +79,7 @@ export function RecentNotes() {
                   className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
                   aria-label="Bookmark note"
                 >
-                  <BookmarkSimple
-                    className="size-4"
-                    weight={bookmarked ? "fill" : "regular"}
-                  />
+                  <BookmarkSimple className="size-4" weight={bookmarked ? "fill" : "regular"} />
                 </button>
 
                 <button

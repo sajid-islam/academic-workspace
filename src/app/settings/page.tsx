@@ -1,22 +1,12 @@
 "use client";
 
-import * as React from "react";
-import {
-  User,
-  Sun,
-  Moon,
-  Laptop,
-  Bell,
-  LockKey,
-  ShieldCheck,
-  Check,
-} from "@phosphor-icons/react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace, ThemeMode } from "@/context/workspace-context";
 import { useToast } from "@/components/ui/toast";
+import { ThemeMode, useWorkspace } from "@/context/workspace-context";
+import { Bell, Laptop, LockKey, Moon, Sun, User } from "@phosphor-icons/react";
+import * as React from "react";
 
 export default function SettingsPage() {
   const { student, theme, setTheme } = useWorkspace();
@@ -72,9 +62,7 @@ export default function SettingsPage() {
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in-50 duration-300">
       {/* Header */}
       <div className="border-b border-border/70 pb-5">
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">
-          Workspace Settings
-        </h1>
+        <h1 className="text-2xl font-bold tracking-tight text-foreground">Workspace Settings</h1>
         <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
           Manage your student account preferences, theme appearance, notifications, and security.
         </p>
@@ -95,9 +83,7 @@ export default function SettingsPage() {
         <form onSubmit={handleSaveAccount} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-foreground">
-                Full Name
-              </label>
+              <label className="text-xs font-semibold text-foreground">Full Name</label>
               <Input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -112,17 +98,13 @@ export default function SettingsPage() {
               <Input
                 value={roll}
                 disabled
-                className="h-9 text-xs font-mono bg-muted/50 cursor-not-allowed opacity-80"
+                className="h-9 text-xs bg-muted/50 cursor-not-allowed opacity-80"
               />
-              <span className="text-[10px] text-muted-foreground">
-                Fixed by Registrar Office
-              </span>
+              <span className="text-[10px] text-muted-foreground">Fixed by Registrar Office</span>
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-foreground">
-                University Email
-              </label>
+              <label className="text-xs font-semibold text-foreground">University Email</label>
               <Input
                 type="email"
                 value={email}
@@ -132,9 +114,7 @@ export default function SettingsPage() {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-foreground">
-                Phone Number
-              </label>
+              <label className="text-xs font-semibold text-foreground">Phone Number</label>
               <Input
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -211,12 +191,8 @@ export default function SettingsPage() {
                     </span>
                   )}
                 </div>
-                <h3 className="text-xs font-bold text-foreground mt-3">
-                  {item.label}
-                </h3>
-                <p className="text-[11px] text-muted-foreground mt-0.5">
-                  {item.desc}
-                </p>
+                <h3 className="text-xs font-bold text-foreground mt-3">{item.label}</h3>
+                <p className="text-[11px] text-muted-foreground mt-0.5">{item.desc}</p>
               </button>
             );
           })}
@@ -245,25 +221,17 @@ export default function SettingsPage() {
                 Receive notifications when exam papers are uploaded for your courses
               </span>
             </div>
-            <Switch
-              checked={notifyPapers}
-              onCheckedChange={setNotifyPapers}
-            />
+            <Switch checked={notifyPapers} onCheckedChange={setNotifyPapers} />
           </div>
 
           <div className="flex items-center justify-between pt-4">
             <div>
-              <span className="text-xs font-semibold text-foreground block">
-                New Class Notes
-              </span>
+              <span className="text-xs font-semibold text-foreground block">New Class Notes</span>
               <span className="text-[11px] text-muted-foreground block">
                 Alerts when classmates publish lecture summaries or formula sheets
               </span>
             </div>
-            <Switch
-              checked={notifyNotes}
-              onCheckedChange={setNotifyNotes}
-            />
+            <Switch checked={notifyNotes} onCheckedChange={setNotifyNotes} />
           </div>
 
           <div className="flex items-center justify-between pt-4">
@@ -275,10 +243,7 @@ export default function SettingsPage() {
                 Notifications when textbooks, simulators, and video playlists are added
               </span>
             </div>
-            <Switch
-              checked={notifyResources}
-              onCheckedChange={setNotifyResources}
-            />
+            <Switch checked={notifyResources} onCheckedChange={setNotifyResources} />
           </div>
 
           <div className="flex items-center justify-between pt-4">
@@ -290,10 +255,7 @@ export default function SettingsPage() {
                 High-priority alerts for exam routines, class cancellations, and fee deadlines
               </span>
             </div>
-            <Switch
-              checked={notifyNotices}
-              onCheckedChange={setNotifyNotices}
-            />
+            <Switch checked={notifyNotices} onCheckedChange={setNotifyNotices} />
           </div>
         </div>
       </div>
@@ -312,9 +274,7 @@ export default function SettingsPage() {
 
         <form onSubmit={handleUpdatePassword} className="space-y-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-foreground">
-              Current Password
-            </label>
+            <label className="text-xs font-semibold text-foreground">Current Password</label>
             <Input
               type="password"
               placeholder="••••••••"
@@ -326,9 +286,7 @@ export default function SettingsPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-foreground">
-                New Password
-              </label>
+              <label className="text-xs font-semibold text-foreground">New Password</label>
               <Input
                 type="password"
                 placeholder="At least 8 characters"
@@ -339,9 +297,7 @@ export default function SettingsPage() {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-foreground">
-                Confirm New Password
-              </label>
+              <label className="text-xs font-semibold text-foreground">Confirm New Password</label>
               <Input
                 type="password"
                 placeholder="Repeat new password"

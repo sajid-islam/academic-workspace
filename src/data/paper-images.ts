@@ -11,7 +11,7 @@ export function generateExamPaperImage({
   pageNumber,
   totalPages,
   questions,
-  seal = "AUST-CSE",
+  seal = "NWU-CSE",
 }: {
   courseCode: string;
   courseTitle: string;
@@ -67,7 +67,7 @@ export function generateExamPaperImage({
     <g transform="translate(400, 560)" opacity="0.04" text-anchor="middle">
       <circle r="140" fill="none" stroke="#000000" stroke-width="8"/>
       <circle r="115" fill="none" stroke="#000000" stroke-width="3"/>
-      <text y="10" font-family="'Times New Roman', serif" font-size="52" font-weight="bold">AUST</text>
+      <text y="10" font-family="'Times New Roman', serif" font-size="52" font-weight="bold">NWU</text>
       <text y="45" font-family="'Times New Roman', serif" font-size="20">DEPARTMENT OF CSE</text>
     </g>
 

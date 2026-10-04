@@ -1,22 +1,20 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import {
-  VideoCamera,
-  PlayCircle,
-  Globe,
-  FilePdf,
-  BookBookmark,
-  FileText,
-  ArrowSquareOut,
-  BookmarkSimple,
-  ArrowRight,
-} from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
 import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
 import { ResourceType } from "@/types/resource";
+import {
+  ArrowSquareOut,
+  BookBookmark,
+  BookmarkSimple,
+  FilePdf,
+  FileText,
+  Globe,
+  PlayCircle,
+  VideoCamera,
+} from "@phosphor-icons/react";
+import Link from "next/link";
 
 export function getResourceIcon(type: ResourceType) {
   switch (type) {
@@ -45,12 +43,8 @@ export function RecentResources() {
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-base font-semibold text-foreground">
-            Curated Resources
-          </h2>
-          <p className="text-xs text-muted-foreground">
-            Recommended courses, textbooks & tools
-          </p>
+          <h2 className="text-base font-semibold text-foreground">Curated Resources</h2>
+          <p className="text-xs text-muted-foreground">Recommended courses, textbooks & tools</p>
         </div>
         <Link
           href="/resources"
@@ -78,9 +72,7 @@ export function RecentResources() {
 
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-foreground">
-                      {subject?.code}
-                    </span>
+                    <span className="text-xs font-bold text-foreground">{subject?.code}</span>
                     <Badge variant="outline" className="text-[10px] capitalize">
                       {res.type}
                     </Badge>
@@ -114,10 +106,7 @@ export function RecentResources() {
                   className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
                   aria-label="Bookmark resource"
                 >
-                  <BookmarkSimple
-                    className="size-4"
-                    weight={bookmarked ? "fill" : "regular"}
-                  />
+                  <BookmarkSimple className="size-4" weight={bookmarked ? "fill" : "regular"} />
                 </button>
               </div>
             </div>

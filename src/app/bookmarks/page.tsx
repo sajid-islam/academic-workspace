@@ -1,29 +1,27 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import {
-  BookmarkSimple,
-  FileImage,
-  BookOpenText,
-  FolderSimpleStar,
-  Trash,
-  ArrowSquareOut,
-  Eye,
-  Images,
-} from "@phosphor-icons/react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { getResourceIcon } from "@/components/dashboard/recent-resources";
+import { NoteViewerDialog } from "@/components/notes/note-viewer-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useWorkspace } from "@/context/workspace-context";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/toast";
-import { NoteViewerDialog } from "@/components/notes/note-viewer-dialog";
+import { useWorkspace } from "@/context/workspace-context";
 import { Note } from "@/types/note";
-import { getResourceIcon } from "@/components/dashboard/recent-resources";
+import {
+  ArrowSquareOut,
+  BookmarkSimple,
+  BookOpenText,
+  FileImage,
+  FolderSimpleStar,
+  Images,
+  Trash,
+} from "@phosphor-icons/react";
+import Link from "next/link";
+import * as React from "react";
 
 export default function BookmarksPage() {
-  const { bookmarks, questionPapers, notes, resources, subjects, toggleBookmark } =
-    useWorkspace();
+  const { bookmarks, questionPapers, notes, resources, subjects, toggleBookmark } = useWorkspace();
   const { toast } = useToast();
 
   const [activeTab, setActiveTab] = React.useState<"all" | "papers" | "notes" | "resources">("all");
@@ -32,17 +30,16 @@ export default function BookmarksPage() {
 
   // Resolve bookmarked items
   const bookmarkedPapers = questionPapers.filter((p) =>
-    bookmarks.some((b) => b.id === p.id && b.type === "paper")
+    bookmarks.some((b) => b.id === p.id && b.type === "paper"),
   );
   const bookmarkedNotes = notes.filter((n) =>
-    bookmarks.some((b) => b.id === n.id && b.type === "note")
+    bookmarks.some((b) => b.id === n.id && b.type === "note"),
   );
   const bookmarkedResources = resources.filter((r) =>
-    bookmarks.some((b) => b.id === r.id && b.type === "resource")
+    bookmarks.some((b) => b.id === r.id && b.type === "resource"),
   );
 
-  const totalCount =
-    bookmarkedPapers.length + bookmarkedNotes.length + bookmarkedResources.length;
+  const totalCount = bookmarkedPapers.length + bookmarkedNotes.length + bookmarkedResources.length;
 
   return (
     <div className="space-y-6 animate-in fade-in-50 duration-300">
@@ -67,11 +64,7 @@ export default function BookmarksPage() {
       </div>
 
       {/* Tabs */}
-      <Tabs
-        value={activeTab}
-        onValueChange={(v) => setActiveTab(v as any)}
-        className="space-y-5"
-      >
+      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)} className="space-y-5">
         <TabsList className="grid grid-cols-4 max-w-md h-10">
           <TabsTrigger value="all" className="text-xs gap-1.5">
             <span>All</span>
@@ -139,7 +132,10 @@ export default function BookmarksPage() {
                               className="w-full h-full object-cover object-top"
                             />
                             <div className="absolute top-2 left-2">
-                              <Badge variant="default" className="text-[10px] bg-black/80 text-white border-0">
+                              <Badge
+                                variant="default"
+                                className="text-[10px] bg-black/80 text-white border-0"
+                              >
                                 {paper.examType} · {paper.year}
                               </Badge>
                             </div>
@@ -150,7 +146,7 @@ export default function BookmarksPage() {
                           </Link>
                           <div className="p-3 flex items-center justify-between">
                             <div className="min-w-0 pr-2">
-                              <span className="font-mono text-xs font-bold text-primary block">
+                              <span className="text-xs font-bold text-primary block">
                                 {subject?.code}
                               </span>
                               <Link
@@ -195,7 +191,7 @@ export default function BookmarksPage() {
                         >
                           <div>
                             <div className="flex items-center justify-between">
-                              <span className="text-xs font-mono font-bold text-primary">
+                              <span className="text-xs font-bold text-primary">
                                 {subject?.code}
                               </span>
                               <Badge variant="secondary" className="text-[10px]">
@@ -267,7 +263,7 @@ export default function BookmarksPage() {
                                 <div className="size-6 rounded bg-muted flex items-center justify-center">
                                   {getResourceIcon(res.type)}
                                 </div>
-                                <span className="text-xs font-mono font-bold text-primary">
+                                <span className="text-xs font-bold text-primary">
                                   {subject?.code}
                                 </span>
                               </div>
@@ -333,14 +329,17 @@ export default function BookmarksPage() {
                         className="w-full h-full object-cover object-top"
                       />
                       <div className="absolute top-2 left-2">
-                        <Badge variant="default" className="text-[10px] bg-black/80 text-white border-0">
+                        <Badge
+                          variant="default"
+                          className="text-[10px] bg-black/80 text-white border-0"
+                        >
                           {paper.examType} · {paper.year}
                         </Badge>
                       </div>
                     </Link>
                     <div className="p-3 flex items-center justify-between">
                       <div className="min-w-0 pr-2">
-                        <span className="font-mono text-xs font-bold text-primary block">
+                        <span className="text-xs font-bold text-primary block">
                           {subject?.code}
                         </span>
                         <Link
@@ -384,9 +383,7 @@ export default function BookmarksPage() {
                   >
                     <div>
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono font-bold text-primary">
-                          {subject?.code}
-                        </span>
+                        <span className="text-xs font-bold text-primary">{subject?.code}</span>
                         <Badge variant="secondary" className="text-[10px]">
                           {note.type}
                         </Badge>
@@ -433,9 +430,7 @@ export default function BookmarksPage() {
               })}
             </div>
           ) : (
-            <p className="text-xs text-muted-foreground text-center py-8">
-              No notes bookmarked.
-            </p>
+            <p className="text-xs text-muted-foreground text-center py-8">No notes bookmarked.</p>
           )}
         </TabsContent>
 
@@ -456,17 +451,13 @@ export default function BookmarksPage() {
                           <div className="size-6 rounded bg-muted flex items-center justify-center">
                             {getResourceIcon(res.type)}
                           </div>
-                          <span className="text-xs font-mono font-bold text-primary">
-                            {subject?.code}
-                          </span>
+                          <span className="text-xs font-bold text-primary">{subject?.code}</span>
                         </div>
                         <Badge variant="outline" className="text-[10px] capitalize">
                           {res.type}
                         </Badge>
                       </div>
-                      <h4 className="text-sm font-semibold text-foreground mt-2">
-                        {res.title}
-                      </h4>
+                      <h4 className="text-sm font-semibold text-foreground mt-2">{res.title}</h4>
                       <p className="text-xs text-muted-foreground line-clamp-2 mt-1">
                         {res.description}
                       </p>

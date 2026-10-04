@@ -1,10 +1,9 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import { ClockAfternoon, CalendarBlank, MapPin, ArrowRight } from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
 import { useWorkspace } from "@/context/workspace-context";
+import { ClockAfternoon, MapPin } from "@phosphor-icons/react";
+import Link from "next/link";
 
 export function UpcomingExams() {
   const { exams, subjects } = useWorkspace();
@@ -14,12 +13,8 @@ export function UpcomingExams() {
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-base font-semibold text-foreground">
-            Upcoming Exams
-          </h2>
-          <p className="text-xs text-muted-foreground">
-            Midterm assessment schedule
-          </p>
+          <h2 className="text-base font-semibold text-foreground">Upcoming Exams</h2>
+          <p className="text-xs text-muted-foreground">Midterm assessment schedule</p>
         </div>
         <Link
           href="/exams"
@@ -53,9 +48,7 @@ export function UpcomingExams() {
 
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-foreground">
-                      {subject?.code}
-                    </span>
+                    <span className="text-xs font-bold text-foreground">{subject?.code}</span>
                     <Badge variant="outline" className="text-[10px]">
                       {exam.examType}
                     </Badge>

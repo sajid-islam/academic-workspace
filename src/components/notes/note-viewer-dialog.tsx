@@ -1,29 +1,25 @@
 "use client";
 
-import * as React from "react";
-import {
-  BookOpenText,
-  DownloadSimple,
-  BookmarkSimple,
-  CheckCircle,
-  CalendarBlank,
-  User,
-  FilePdf,
-  ShareNetwork,
-} from "@phosphor-icons/react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { useWorkspace } from "@/context/workspace-context";
 import { useToast } from "@/components/ui/toast";
+import { useWorkspace } from "@/context/workspace-context";
 import { Note } from "@/types/note";
+import {
+  BookmarkSimple,
+  CalendarBlank,
+  CheckCircle,
+  DownloadSimple,
+  ShareNetwork,
+  User,
+} from "@phosphor-icons/react";
 
 interface NoteViewerDialogProps {
   note: Note | null;
@@ -47,9 +43,7 @@ export function NoteViewerDialog({ note, open, onOpenChange }: NoteViewerDialogP
         <div className="p-6 pb-4 border-b border-border bg-card">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-bold text-primary">
-                {subject?.code}
-              </span>
+              <span className="text-xs font-bold text-primary">{subject?.code}</span>
               <Badge variant="secondary" className="text-[10px]">
                 {note.type}
               </Badge>
@@ -68,10 +62,7 @@ export function NoteViewerDialog({ note, open, onOpenChange }: NoteViewerDialogP
               }}
               className="p-1 rounded text-muted-foreground hover:text-primary transition-colors"
             >
-              <BookmarkSimple
-                className="size-5"
-                weight={bookmarked ? "fill" : "regular"}
-              />
+              <BookmarkSimple className="size-5" weight={bookmarked ? "fill" : "regular"} />
             </button>
           </div>
 
@@ -85,7 +76,9 @@ export function NoteViewerDialog({ note, open, onOpenChange }: NoteViewerDialogP
           <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground mt-3 pt-3 border-t border-border/60">
             <span className="flex items-center gap-1.5">
               <User className="size-3.5 text-muted-foreground/70" />
-              <span>{note.author} ({note.authorRoll})</span>
+              <span>
+                {note.author} ({note.authorRoll})
+              </span>
             </span>
             <span className="flex items-center gap-1.5">
               <CalendarBlank className="size-3.5 text-muted-foreground/70" />
@@ -148,12 +141,7 @@ export function NoteViewerDialog({ note, open, onOpenChange }: NoteViewerDialogP
           </Button>
 
           <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => onOpenChange(false)}
-            >
+            <Button type="button" variant="outline" size="sm" onClick={() => onOpenChange(false)}>
               Close
             </Button>
             <Button

@@ -1,11 +1,11 @@
 "use client";
 
-import * as React from "react";
 import { usePathname } from "next/navigation";
+import * as React from "react";
+import { CommandSearchDialog } from "./command-search-dialog";
+import { MobileNav } from "./mobile-nav";
 import { Sidebar } from "./sidebar";
 import { Topbar } from "./topbar";
-import { MobileNav } from "./mobile-nav";
-import { CommandSearchDialog } from "./command-search-dialog";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -16,7 +16,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   if (isAuthPage) {
     return (
-      <main className="min-h-screen flex flex-col justify-center items-center p-4 bg-background">
+      <main className="min-h-screen flex flex-col justify-center items-center  bg-background">
         {children}
         <CommandSearchDialog />
       </main>
@@ -34,9 +34,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="flex-1 flex flex-col min-w-0 pb-16 lg:pb-0">
         <Topbar onOpenMobileNav={() => setIsMobileNavOpen(true)} />
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
-          {children}
-        </main>
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">{children}</main>
       </div>
 
       {/* Mobile Navigation & Drawer */}

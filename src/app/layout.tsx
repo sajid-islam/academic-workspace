@@ -1,8 +1,7 @@
 import { AppShell } from "@/components/layout/app-shell";
-import { ToastProvider } from "@/components/ui/toast";
+import { AppToaster } from "@/components/ui/toaster";
 import { WorkspaceProvider } from "@/context/workspace-context";
 import { cn } from "@/lib/utils";
-import { Toaster } from "@yusufceng1z/ding-react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -27,10 +26,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <WorkspaceProvider>
-          <ToastProvider>
-            <Toaster position="top-center" />
-            <AppShell>{children}</AppShell>
-          </ToastProvider>
+          <AppToaster />
+          <AppShell>{children}</AppShell>
         </WorkspaceProvider>
       </body>
     </html>

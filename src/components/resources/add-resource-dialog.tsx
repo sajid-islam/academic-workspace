@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useWorkspace } from "@/context/workspace-context";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { ResourceType } from "@/types/resource";
 
 interface AddResourceDialogProps {
@@ -24,7 +24,6 @@ interface AddResourceDialogProps {
 
 export function AddResourceDialog({ open, onOpenChange }: AddResourceDialogProps) {
   const { subjects, addResource, student } = useWorkspace();
-  const { toast } = useToast();
 
   const [subjectId, setSubjectId] = React.useState(subjects[0]?.id || "sub-cse1101");
   const [title, setTitle] = React.useState("");
@@ -36,11 +35,7 @@ export function AddResourceDialog({ open, onOpenChange }: AddResourceDialogProps
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !url.trim()) {
-      toast({
-        title: "Required Fields",
-        description: "Please provide a resource title and URL.",
-        type: "error",
-      });
+      toast.error("Required Fields", { description: "Please provide a resource title and URL." });
       return;
     }
 
@@ -62,11 +57,7 @@ export function AddResourceDialog({ open, onOpenChange }: AddResourceDialogProps
     });
 
     onOpenChange(false);
-    toast({
-      title: "Resource Added!",
-      description: `"${title}" has been saved to the shared learning library.`,
-      type: "success",
-    });
+    toast.success("Resource Added!", { description: `"${title}" has been saved to the shared learning library.` });
 
     // Reset
     setTitle("");

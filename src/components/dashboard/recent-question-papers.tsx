@@ -1,14 +1,13 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { BookmarkSimple, Eye, Images } from "@phosphor-icons/react";
 import Link from "next/link";
 
 export function RecentQuestionPapers() {
   const { questionPapers, subjects, isBookmarked, toggleBookmark } = useWorkspace();
-  const { toast } = useToast();
   const recentPapers = questionPapers.slice(0, 4);
 
   return (
@@ -78,10 +77,7 @@ export function RecentQuestionPapers() {
                       onClick={(e) => {
                         e.preventDefault();
                         const next = toggleBookmark(paper.id, "paper");
-                        toast({
-                          title: next ? "Bookmarked paper" : "Removed bookmark",
-                          type: "info",
-                        });
+                        toast.info(next ? "Bookmarked paper" : "Removed bookmark");
                       }}
                       className="text-muted-foreground hover:text-primary transition-colors p-0.5 rounded"
                       aria-label="Bookmark question paper"

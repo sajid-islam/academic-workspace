@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useWorkspace } from "@/context/workspace-context";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { NoteType } from "@/types/note";
 
 interface AddNoteDialogProps {
@@ -24,7 +24,6 @@ interface AddNoteDialogProps {
 
 export function AddNoteDialog({ open, onOpenChange }: AddNoteDialogProps) {
   const { subjects, addNote, student } = useWorkspace();
-  const { toast } = useToast();
 
   const [subjectId, setSubjectId] = React.useState(subjects[0]?.id || "sub-cse1101");
   const [title, setTitle] = React.useState("");
@@ -38,11 +37,7 @@ export function AddNoteDialog({ open, onOpenChange }: AddNoteDialogProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !topic.trim()) {
-      toast({
-        title: "Required Fields",
-        description: "Please provide a note title and topic.",
-        type: "error",
-      });
+      toast.error("Required Fields", { description: "Please provide a note title and topic." });
       return;
     }
 
@@ -76,11 +71,7 @@ export function AddNoteDialog({ open, onOpenChange }: AddNoteDialogProps) {
     });
 
     onOpenChange(false);
-    toast({
-      title: "Note Shared!",
-      description: `"${title}" has been added to class notes.`,
-      type: "success",
-    });
+    toast.success("Note Shared!", { description: `"${title}" has been added to class notes.` });
 
     // Reset
     setTitle("");

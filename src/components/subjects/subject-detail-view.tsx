@@ -8,7 +8,6 @@ import { AddResourceDialog } from "@/components/resources/add-resource-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/components/ui/toast";
 import { useWorkspace } from "@/context/workspace-context";
 import { Note } from "@/types/note";
 import {
@@ -33,7 +32,6 @@ interface SubjectDetailViewProps {
 export function SubjectDetailView({ subjectId }: SubjectDetailViewProps) {
   const { subjects, questionPapers, notes, resources, isBookmarked, toggleBookmark } =
     useWorkspace();
-  const { toast } = useToast();
 
   const [activeTab, setActiveTab] = React.useState("overview");
   const [isAddPaperOpen, setIsAddPaperOpen] = React.useState(false);

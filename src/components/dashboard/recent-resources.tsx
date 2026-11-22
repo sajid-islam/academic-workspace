@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { ResourceType } from "@/types/resource";
 import {
@@ -36,7 +36,6 @@ export function getResourceIcon(type: ResourceType) {
 
 export function RecentResources() {
   const { resources, subjects, isBookmarked, toggleBookmark } = useWorkspace();
-  const { toast } = useToast();
   const recentResources = resources.slice(0, 3);
 
   return (
@@ -98,10 +97,7 @@ export function RecentResources() {
                 <button
                   onClick={() => {
                     const next = toggleBookmark(res.id, "resource");
-                    toast({
-                      title: next ? "Bookmarked resource" : "Removed bookmark",
-                      type: "info",
-                    });
+                    toast.info(next ? "Bookmarked resource" : "Removed bookmark");
                   }}
                   className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
                   aria-label="Bookmark resource"

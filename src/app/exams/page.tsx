@@ -3,14 +3,13 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { CheckCircle, ClockAfternoon, DownloadSimple, MapPin, Timer } from "@phosphor-icons/react";
 import * as React from "react";
 
 export default function ExamsPage() {
   const { exams, subjects } = useWorkspace();
-  const { toast } = useToast();
 
   const [activeTab, setActiveTab] = React.useState<"upcoming" | "all" | "past">("upcoming");
 
@@ -44,11 +43,7 @@ export default function ExamsPage() {
         <Button
           variant="outline"
           onClick={() => {
-            toast({
-              title: "Exam Routine Downloaded",
-              description: "PDF copy of Midterm routine saved to device",
-              type: "success",
-            });
+            toast.success("Exam Routine Downloaded", { description: "PDF copy of Midterm routine saved to device" });
           }}
           className="gap-2 shrink-0 text-xs"
         >

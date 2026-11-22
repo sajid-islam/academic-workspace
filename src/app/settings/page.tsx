@@ -3,14 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { ThemeMode, useWorkspace } from "@/context/workspace-context";
 import { Bell, Laptop, LockKey, Moon, Sun, User } from "@phosphor-icons/react";
 import * as React from "react";
 
 export default function SettingsPage() {
   const { student, theme, setTheme } = useWorkspace();
-  const { toast } = useToast();
 
   // Account state
   const [name, setName] = React.useState(student.name);
@@ -31,28 +30,16 @@ export default function SettingsPage() {
 
   const handleSaveAccount = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Account Updated",
-      description: "Profile changes saved successfully.",
-      type: "success",
-    });
+    toast.success("Account Updated", { description: "Profile changes saved successfully." });
   };
 
   const handleUpdatePassword = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newPassword || newPassword !== confirmPassword) {
-      toast({
-        title: "Password Mismatch",
-        description: "New password and confirmation do not match.",
-        type: "error",
-      });
+      toast.error("Password Mismatch", { description: "New password and confirmation do not match." });
       return;
     }
-    toast({
-      title: "Password Changed",
-      description: "Your security credentials have been updated.",
-      type: "success",
-    });
+    toast.success("Password Changed", { description: "Your security credentials have been updated." });
     setCurrentPassword("");
     setNewPassword("");
     setConfirmPassword("");
@@ -172,10 +159,7 @@ export default function SettingsPage() {
                 key={item.id}
                 onClick={() => {
                   setTheme(item.id);
-                  toast({
-                    title: `${item.label} Activated`,
-                    type: "info",
-                  });
+                  toast.info(`${item.label} Activated`);
                 }}
                 className={`p-4 rounded-xl border text-left transition-all ${
                   isSelected

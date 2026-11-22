@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import {
   Bell,
@@ -55,7 +55,6 @@ const pathTitles: Record<string, { title: string; category?: string }> = {
 export function Topbar({ onOpenMobileNav }: { onOpenMobileNav?: () => void }) {
   const pathname = usePathname();
   const { theme, setTheme, setIsSearchOpen, student, notices } = useWorkspace();
-  const { toast } = useToast();
 
   const currentRouteMeta = pathTitles[pathname] || {
     title: pathname.split("/").pop()?.replace(/-/g, " ") || "Overview",
@@ -187,7 +186,7 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav?: () => void }) {
             <DropdownMenuItem
               onClick={() => {
                 setTheme("light");
-                toast({ title: "Light mode enabled", type: "info" });
+                toast.info("Light mode enabled");
               }}
               className="gap-2 text-xs"
             >
@@ -198,7 +197,7 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav?: () => void }) {
             <DropdownMenuItem
               onClick={() => {
                 setTheme("dark");
-                toast({ title: "Dark mode enabled", type: "info" });
+                toast.info("Dark mode enabled");
               }}
               className="gap-2 text-xs"
             >
@@ -209,7 +208,7 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav?: () => void }) {
             <DropdownMenuItem
               onClick={() => {
                 setTheme("system");
-                toast({ title: "System theme synced", type: "info" });
+                toast.info("System theme synced");
               }}
               className="gap-2 text-xs"
             >

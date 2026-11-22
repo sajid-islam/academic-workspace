@@ -24,7 +24,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { Resource } from "@/types/resource";
 import { ArrowSquareOut, MagnifyingGlass, Trash } from "@phosphor-icons/react";
@@ -32,7 +32,6 @@ import * as React from "react";
 
 export default function AdminResourcesPage() {
   const { resources, subjects, deleteResource } = useWorkspace();
-  const { toast } = useToast();
 
   const [search, setSearch] = React.useState("");
   const [subjectFilter, setSubjectFilter] = React.useState("all");
@@ -63,11 +62,7 @@ export default function AdminResourcesPage() {
   const handleConfirmDelete = () => {
     if (!deletingResource) return;
     deleteResource(deletingResource.id);
-    toast({
-      title: "Resource Removed",
-      description: `"${deletingResource.title}" removed from repository.`,
-      type: "info",
-    });
+    toast.info("Resource Removed", { description: `"${deletingResource.title}" removed from repository.` });
     setDeletingResource(null);
   };
 

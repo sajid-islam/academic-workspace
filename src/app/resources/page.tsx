@@ -5,7 +5,7 @@ import { AddResourceDialog } from "@/components/resources/add-resource-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import {
   ArrowSquareOut,
@@ -19,7 +19,6 @@ import * as React from "react";
 
 export default function ResourcesPage() {
   const { resources, subjects, isBookmarked, toggleBookmark } = useWorkspace();
-  const { toast } = useToast();
 
   const [isAddOpen, setIsAddOpen] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -56,11 +55,7 @@ export default function ResourcesPage() {
 
   const copyUrl = (url: string, title: string) => {
     navigator.clipboard?.writeText(url);
-    toast({
-      title: "URL Copied",
-      description: `Copied link for "${title}"`,
-      type: "info",
-    });
+    toast.info("URL Copied", { description: `Copied link for "${title}"` });
   };
 
   return (
@@ -163,10 +158,7 @@ export default function ResourcesPage() {
                     <button
                       onClick={() => {
                         const next = toggleBookmark(res.id, "resource");
-                        toast({
-                          title: next ? "Bookmarked resource" : "Removed bookmark",
-                          type: "info",
-                        });
+                        toast.info(next ? "Bookmarked resource" : "Removed bookmark");
                       }}
                       className="p-1 rounded text-muted-foreground hover:text-primary transition-colors"
                       aria-label="Bookmark resource"

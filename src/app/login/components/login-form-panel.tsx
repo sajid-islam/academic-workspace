@@ -44,7 +44,6 @@ export function LoginFormPanel() {
       const res = await AxiosClient.post("/auth/login", data);
       Cookies.set("access_tknx", res.data.access_token);
 
-      toast.configure({ sound: true });
       toast.success("You are logged in successfully, ENJOY!");
 
       router.push("/");

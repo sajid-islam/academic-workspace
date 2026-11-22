@@ -23,7 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useWorkspace } from "@/context/workspace-context";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { ExamType } from "@/types/question-paper";
 import { generateExamPaperImage } from "@/data/paper-images";
 
@@ -34,7 +34,6 @@ interface AddPaperDialogProps {
 
 export function AddPaperDialog({ open, onOpenChange }: AddPaperDialogProps) {
   const { subjects, addQuestionPaper, student } = useWorkspace();
-  const { toast } = useToast();
 
   const [subjectId, setSubjectId] = React.useState(subjects[0]?.id || "sub-cse1101");
   const [examType, setExamType] = React.useState<ExamType>("Midterm");
@@ -108,11 +107,7 @@ export function AddPaperDialog({ open, onOpenChange }: AddPaperDialogProps) {
       ],
     });
     setImages((prev) => [...prev, newPage]);
-    toast({
-      title: `Page ${newPageNum} Added`,
-      description: "Appended exam page to image stack.",
-      type: "info",
-    });
+    toast.info(`Page ${newPageNum} Added`, { description: "Appended exam page to image stack." });
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,11 +120,7 @@ export function AddPaperDialog({ open, onOpenChange }: AddPaperDialogProps) {
     reader.onload = (event) => {
       if (event.target?.result) {
         setImages((prev) => [...prev, event.target!.result as string]);
-        toast({
-          title: "Image Uploaded",
-          description: `Loaded ${file.name} successfully`,
-          type: "success",
-        });
+        toast.success("Image Uploaded", { description: `Loaded ${file.name} successfully` });
       }
     };
     reader.readAsDataURL(file);
@@ -138,11 +129,7 @@ export function AddPaperDialog({ open, onOpenChange }: AddPaperDialogProps) {
 
   const handleRemoveImage = (index: number) => {
     if (images.length <= 1) {
-      toast({
-        title: "At least one image required",
-        description: "A question paper must contain at least 1 image page.",
-        type: "warning",
-      });
+      toast.warning("At least one image required", { description: "A question paper must contain at least 1 image page." });
       return;
     }
     setImages((prev) => prev.filter((_, i) => i !== index));
@@ -175,21 +162,13 @@ export function AddPaperDialog({ open, onOpenChange }: AddPaperDialogProps) {
     updated.unshift(primary);
     setImages(updated);
     setPrimaryIndex(0);
-    toast({
-      title: "Primary Cover Updated",
-      description: `Page ${index + 1} is now set as primary thumbnail.`,
-      type: "info",
-    });
+    toast.info("Primary Cover Updated", { description: `Page ${index + 1} is now set as primary thumbnail.` });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (images.length === 0) {
-      toast({
-        title: "Images Required",
-        description: "Please attach at least one question paper image.",
-        type: "error",
-      });
+      toast.error("Images Required", { description: "Please attach at least one question paper image." });
       return;
     }
 
@@ -219,11 +198,7 @@ export function AddPaperDialog({ open, onOpenChange }: AddPaperDialogProps) {
       setIsUploading(false);
       onOpenChange(false);
 
-      toast({
-        title: "Question Paper Uploaded!",
-        description: `"${created.title}" with ${created.pagesCount} pages is now live in archive.`,
-        type: "success",
-      });
+      toast.success("Question Paper Uploaded!", { description: `"${created.title}" with ${created.pagesCount} pages is now live in archive.` });
 
       // Reset
       setTitle("");

@@ -43,12 +43,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useWorkspace } from "@/context/workspace-context";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { Notice, NoticePriority } from "@/types/notice";
 
 export default function AdminNoticesPage() {
   const { notices, addNotice, deleteNotice, student } = useWorkspace();
-  const { toast } = useToast();
 
   const [search, setSearch] = React.useState("");
   const [priorityFilter, setPriorityFilter] = React.useState("all");
@@ -99,11 +98,7 @@ export default function AdminNoticesPage() {
     });
 
     setIsAddOpen(false);
-    toast({
-      title: "Notice Broadcasted",
-      description: `"${form.title}" published to student portal.`,
-      type: "success",
-    });
+    toast.success("Notice Broadcasted", { description: `"${form.title}" published to student portal.` });
 
     setForm({
       title: "",
@@ -119,11 +114,7 @@ export default function AdminNoticesPage() {
   const handleConfirmDelete = () => {
     if (!deletingNotice) return;
     deleteNotice(deletingNotice.id);
-    toast({
-      title: "Notice Deleted",
-      description: "Announcement removed from public feed.",
-      type: "info",
-    });
+    toast.info("Notice Deleted", { description: "Announcement removed from public feed." });
     setDeletingNotice(null);
   };
 

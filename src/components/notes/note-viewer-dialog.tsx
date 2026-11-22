@@ -9,7 +9,7 @@ import {
   DialogFooter,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { Note } from "@/types/note";
 import {
@@ -29,7 +29,6 @@ interface NoteViewerDialogProps {
 
 export function NoteViewerDialog({ note, open, onOpenChange }: NoteViewerDialogProps) {
   const { subjects, isBookmarked, toggleBookmark } = useWorkspace();
-  const { toast } = useToast();
 
   if (!note) return null;
 
@@ -55,10 +54,7 @@ export function NoteViewerDialog({ note, open, onOpenChange }: NoteViewerDialogP
             <button
               onClick={() => {
                 const next = toggleBookmark(note.id, "note");
-                toast({
-                  title: next ? "Bookmarked note" : "Removed bookmark",
-                  type: "info",
-                });
+                toast.info(next ? "Bookmarked note" : "Removed bookmark");
               }}
               className="p-1 rounded text-muted-foreground hover:text-primary transition-colors"
             >
@@ -128,11 +124,7 @@ export function NoteViewerDialog({ note, open, onOpenChange }: NoteViewerDialogP
             size="sm"
             onClick={() => {
               navigator.clipboard?.writeText(window.location.href);
-              toast({
-                title: "Link Copied",
-                description: "Link copied to clipboard",
-                type: "info",
-              });
+              toast.info("Link Copied", { description: "Link copied to clipboard" });
             }}
             className="text-xs gap-1.5"
           >
@@ -147,11 +139,7 @@ export function NoteViewerDialog({ note, open, onOpenChange }: NoteViewerDialogP
             <Button
               size="sm"
               onClick={() => {
-                toast({
-                  title: "Downloading Document",
-                  description: `Downloading "${note.title}" (${note.fileSize})`,
-                  type: "success",
-                });
+                toast.success("Downloading Document", { description: `Downloading "${note.title}" (${note.fileSize})` });
               }}
               className="text-xs gap-1.5"
             >

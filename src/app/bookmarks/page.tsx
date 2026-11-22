@@ -5,7 +5,7 @@ import { NoteViewerDialog } from "@/components/notes/note-viewer-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { Note } from "@/types/note";
 import {
@@ -22,7 +22,6 @@ import * as React from "react";
 
 export default function BookmarksPage() {
   const { bookmarks, questionPapers, notes, resources, subjects, toggleBookmark } = useWorkspace();
-  const { toast } = useToast();
 
   const [activeTab, setActiveTab] = React.useState<"all" | "papers" | "notes" | "resources">("all");
   const [selectedNote, setSelectedNote] = React.useState<Note | null>(null);
@@ -159,7 +158,7 @@ export default function BookmarksPage() {
                             <button
                               onClick={() => {
                                 toggleBookmark(paper.id, "paper");
-                                toast({ title: "Bookmark removed", type: "info" });
+                                toast.info("Bookmark removed");
                               }}
                               className="p-1 rounded text-muted-foreground hover:text-rose-600 transition-colors shrink-0"
                               title="Remove bookmark"
@@ -227,7 +226,7 @@ export default function BookmarksPage() {
                               <button
                                 onClick={() => {
                                   toggleBookmark(note.id, "note");
-                                  toast({ title: "Bookmark removed", type: "info" });
+                                  toast.info("Bookmark removed");
                                 }}
                                 className="p-1 text-muted-foreground hover:text-rose-600"
                               >
@@ -291,7 +290,7 @@ export default function BookmarksPage() {
                             <button
                               onClick={() => {
                                 toggleBookmark(res.id, "resource");
-                                toast({ title: "Bookmark removed", type: "info" });
+                                toast.info("Bookmark removed");
                               }}
                               className="p-1 text-muted-foreground hover:text-rose-600"
                             >
@@ -352,7 +351,7 @@ export default function BookmarksPage() {
                       <button
                         onClick={() => {
                           toggleBookmark(paper.id, "paper");
-                          toast({ title: "Bookmark removed", type: "info" });
+                          toast.info("Bookmark removed");
                         }}
                         className="p-1 rounded text-muted-foreground hover:text-rose-600 transition-colors shrink-0"
                       >
@@ -417,7 +416,7 @@ export default function BookmarksPage() {
                         <button
                           onClick={() => {
                             toggleBookmark(note.id, "note");
-                            toast({ title: "Bookmark removed", type: "info" });
+                            toast.info("Bookmark removed");
                           }}
                           className="p-1 text-muted-foreground hover:text-rose-600"
                         >
@@ -475,7 +474,7 @@ export default function BookmarksPage() {
                       <button
                         onClick={() => {
                           toggleBookmark(res.id, "resource");
-                          toast({ title: "Bookmark removed", type: "info" });
+                          toast.info("Bookmark removed");
                         }}
                         className="p-1 text-muted-foreground hover:text-rose-600"
                       >

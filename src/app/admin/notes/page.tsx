@@ -25,7 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { Note } from "@/types/note";
 import { Eye, MagnifyingGlass, Trash } from "@phosphor-icons/react";
@@ -33,7 +33,6 @@ import * as React from "react";
 
 export default function AdminNotesPage() {
   const { notes, subjects, deleteNote } = useWorkspace();
-  const { toast } = useToast();
 
   const [search, setSearch] = React.useState("");
   const [subjectFilter, setSubjectFilter] = React.useState("all");
@@ -66,11 +65,7 @@ export default function AdminNotesPage() {
   const handleConfirmDelete = () => {
     if (!deletingNote) return;
     deleteNote(deletingNote.id);
-    toast({
-      title: "Note Deleted",
-      description: `"${deletingNote.title}" removed from repository.`,
-      type: "info",
-    });
+    toast.info("Note Deleted", { description: `"${deletingNote.title}" removed from repository.` });
     setDeletingNote(null);
   };
 

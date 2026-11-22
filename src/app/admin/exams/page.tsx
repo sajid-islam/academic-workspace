@@ -31,7 +31,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { Exam } from "@/types/exam";
 import { ExamType } from "@/types/question-paper";
@@ -40,7 +40,6 @@ import * as React from "react";
 
 export default function AdminExamsPage() {
   const { exams, subjects, addExam, deleteExam } = useWorkspace();
-  const { toast } = useToast();
 
   const [page, setPage] = React.useState(1);
   const pageSize = 6;
@@ -86,21 +85,13 @@ export default function AdminExamsPage() {
 
     addExam(newExam);
     setIsAddOpen(false);
-    toast({
-      title: "Exam Scheduled",
-      description: `${newExam.examType} scheduled on ${newExam.date}`,
-      type: "success",
-    });
+    toast.success("Exam Scheduled", { description: `${newExam.examType} scheduled on ${newExam.date}` });
   };
 
   const handleConfirmDelete = () => {
     if (!deletingExam) return;
     deleteExam(deletingExam.id);
-    toast({
-      title: "Exam Removed",
-      description: "Exam schedule slot deleted.",
-      type: "info",
-    });
+    toast.info("Exam Removed", { description: "Exam schedule slot deleted." });
     setDeletingExam(null);
   };
 

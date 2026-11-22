@@ -32,7 +32,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { Student } from "@/types/student";
 import { MagnifyingGlass, PencilSimple, Trash } from "@phosphor-icons/react";
@@ -40,7 +40,6 @@ import * as React from "react";
 
 export default function AdminStudentsPage() {
   const { students, addStudent, updateStudent, deleteStudent } = useWorkspace();
-  const { toast } = useToast();
 
   const [search, setSearch] = React.useState("");
   const [sectionFilter, setSectionFilter] = React.useState("all");
@@ -116,11 +115,7 @@ export default function AdminStudentsPage() {
 
     addStudent(newStd);
     setIsAddOpen(false);
-    toast({
-      title: "Student Added",
-      description: `${newStd.name} (Roll: ${newStd.roll}) added to roster.`,
-      type: "success",
-    });
+    toast.success("Student Added", { description: `${newStd.name} (Roll: ${newStd.roll}) added to roster.` });
   };
 
   const handleOpenEdit = (s: Student) => {
@@ -153,21 +148,13 @@ export default function AdminStudentsPage() {
 
     updateStudent(updated);
     setEditingStudent(null);
-    toast({
-      title: "Student Updated",
-      description: `Updated records for ${updated.name}`,
-      type: "success",
-    });
+    toast.success("Student Updated", { description: `Updated records for ${updated.name}` });
   };
 
   const handleConfirmDelete = () => {
     if (!deletingStudent) return;
     deleteStudent(deletingStudent.id);
-    toast({
-      title: "Student Removed",
-      description: `${deletingStudent.name} has been removed from roster.`,
-      type: "info",
-    });
+    toast.info("Student Removed", { description: `${deletingStudent.name} has been removed from roster.` });
     setDeletingStudent(null);
   };
 

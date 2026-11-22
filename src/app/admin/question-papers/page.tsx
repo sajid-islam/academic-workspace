@@ -24,7 +24,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { QuestionPaper } from "@/types/question-paper";
 import { Eye, Images, MagnifyingGlass, Trash } from "@phosphor-icons/react";
@@ -33,7 +33,6 @@ import * as React from "react";
 
 export default function AdminQuestionPapersPage() {
   const { questionPapers, subjects, deleteQuestionPaper } = useWorkspace();
-  const { toast } = useToast();
 
   const [search, setSearch] = React.useState("");
   const [subjectFilter, setSubjectFilter] = React.useState("all");
@@ -65,11 +64,7 @@ export default function AdminQuestionPapersPage() {
   const handleConfirmDelete = () => {
     if (!deletingPaper) return;
     deleteQuestionPaper(deletingPaper.id);
-    toast({
-      title: "Question Paper Deleted",
-      description: `"${deletingPaper.title}" has been removed from archives.`,
-      type: "info",
-    });
+    toast.info("Question Paper Deleted", { description: `"${deletingPaper.title}" has been removed from archives.` });
     setDeletingPaper(null);
   };
 

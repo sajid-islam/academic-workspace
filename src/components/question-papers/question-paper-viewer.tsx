@@ -2,7 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { cn } from "@/lib/utils";
 import {
@@ -28,7 +28,6 @@ interface QuestionPaperViewerProps {
 
 export function QuestionPaperViewer({ paperId }: QuestionPaperViewerProps) {
   const { questionPapers, subjects, isBookmarked, toggleBookmark } = useWorkspace();
-  const { toast } = useToast();
 
   const paper = questionPapers.find((p) => p.id === paperId) || questionPapers[0];
   const subject = subjects.find((s) => s.id === paper?.subjectId);
@@ -177,10 +176,7 @@ export function QuestionPaperViewer({ paperId }: QuestionPaperViewerProps) {
           <button
             onClick={() => {
               const next = toggleBookmark(paper.id, "paper");
-              toast({
-                title: next ? "Bookmarked paper" : "Removed bookmark",
-                type: "info",
-              });
+              toast.info(next ? "Bookmarked paper" : "Removed bookmark");
             }}
             className="p-2 rounded-lg border border-border bg-card text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
             title="Bookmark Paper"
@@ -198,11 +194,7 @@ export function QuestionPaperViewer({ paperId }: QuestionPaperViewerProps) {
               link.href = paper.images[activePageIndex];
               link.download = `${subject?.code}_${paper.examType}_${paper.year}_page_${activePageIndex + 1}.svg`;
               link.click();
-              toast({
-                title: "Page Downloaded",
-                description: `Downloaded page ${activePageIndex + 1} of ${totalPages}`,
-                type: "success",
-              });
+              toast.success("Page Downloaded", { description: `Downloaded page ${activePageIndex + 1} of ${totalPages}` });
             }}
             className="text-xs gap-1.5 hidden md:inline-flex"
           >
@@ -220,11 +212,7 @@ export function QuestionPaperViewer({ paperId }: QuestionPaperViewerProps) {
                 link.download = `${subject?.code}_${paper.examType}_${paper.year}_page_${i + 1}.svg`;
                 link.click();
               });
-              toast({
-                title: "All Pages Downloaded",
-                description: `Downloaded all ${totalPages} pages for ${subject?.code}`,
-                type: "success",
-              });
+              toast.success("All Pages Downloaded", { description: `Downloaded all ${totalPages} pages for ${subject?.code}` });
             }}
             className="text-xs gap-1.5"
           >

@@ -31,7 +31,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { ClassSlot, DayOfWeek } from "@/types/routine";
 import { Trash } from "@phosphor-icons/react";
@@ -39,7 +39,6 @@ import * as React from "react";
 
 export default function AdminRoutinePage() {
   const { routine, subjects, addRoutineSlot, deleteRoutineSlot } = useWorkspace();
-  const { toast } = useToast();
 
   const [selectedDay, setSelectedDay] = React.useState<string>("all");
   const [page, setPage] = React.useState(1);
@@ -79,21 +78,13 @@ export default function AdminRoutinePage() {
     };
     addRoutineSlot(newSlot);
     setIsAddOpen(false);
-    toast({
-      title: "Class Slot Added",
-      description: `Scheduled on ${newSlot.day} (${newSlot.startTime})`,
-      type: "success",
-    });
+    toast.success("Class Slot Added", { description: `Scheduled on ${newSlot.day} (${newSlot.startTime})` });
   };
 
   const handleConfirmDelete = () => {
     if (!deletingSlot) return;
     deleteRoutineSlot(deletingSlot.id);
-    toast({
-      title: "Class Slot Removed",
-      description: `Removed slot from routine timetable.`,
-      type: "info",
-    });
+    toast.info("Class Slot Removed", { description: `Removed slot from routine timetable.` });
     setDeletingSlot(null);
   };
 

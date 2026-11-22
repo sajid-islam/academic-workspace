@@ -31,7 +31,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { Subject } from "@/types/subject";
 import { MagnifyingGlass, PencilSimple, Trash } from "@phosphor-icons/react";
@@ -39,7 +39,6 @@ import * as React from "react";
 
 export default function AdminSubjectsPage() {
   const { subjects, addSubject, updateSubject, deleteSubject } = useWorkspace();
-  const { toast } = useToast();
 
   const [search, setSearch] = React.useState("");
   const [page, setPage] = React.useState(1);
@@ -127,11 +126,7 @@ export default function AdminSubjectsPage() {
 
     addSubject(newSubject);
     setIsAddOpen(false);
-    toast({
-      title: "Subject Added",
-      description: `${newSubject.code}: ${newSubject.name} created.`,
-      type: "success",
-    });
+    toast.success("Subject Added", { description: `${newSubject.code}: ${newSubject.name} created.` });
   };
 
   const handleOpenEdit = (s: Subject) => {
@@ -173,21 +168,13 @@ export default function AdminSubjectsPage() {
 
     updateSubject(updated);
     setEditingSubject(null);
-    toast({
-      title: "Subject Updated",
-      description: `Changes to ${updated.code} saved.`,
-      type: "success",
-    });
+    toast.success("Subject Updated", { description: `Changes to ${updated.code} saved.` });
   };
 
   const handleConfirmDelete = () => {
     if (!deletingSubject) return;
     deleteSubject(deletingSubject.id);
-    toast({
-      title: "Subject Removed",
-      description: `${deletingSubject.code} removed from semester curriculum.`,
-      type: "info",
-    });
+    toast.info("Subject Removed", { description: `${deletingSubject.code} removed from semester curriculum.` });
     setDeletingSubject(null);
   };
 

@@ -1,14 +1,13 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { BookOpenText, BookmarkSimple, DownloadSimple } from "@phosphor-icons/react";
 import Link from "next/link";
 
 export function RecentNotes() {
   const { notes, subjects, isBookmarked, toggleBookmark } = useWorkspace();
-  const { toast } = useToast();
   const recentNotes = notes.slice(0, 3);
 
   return (
@@ -71,10 +70,7 @@ export function RecentNotes() {
                 <button
                   onClick={() => {
                     const next = toggleBookmark(note.id, "note");
-                    toast({
-                      title: next ? "Bookmarked note" : "Removed bookmark",
-                      type: "info",
-                    });
+                    toast.info(next ? "Bookmarked note" : "Removed bookmark");
                   }}
                   className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
                   aria-label="Bookmark note"
@@ -84,11 +80,7 @@ export function RecentNotes() {
 
                 <button
                   onClick={() => {
-                    toast({
-                      title: "Download Started",
-                      description: `Downloading "${note.title}" (${note.fileSize})`,
-                      type: "success",
-                    });
+                    toast.success("Download Started", { description: `Downloading "${note.title}" (${note.fileSize})` });
                   }}
                   className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
                   aria-label="Download note"

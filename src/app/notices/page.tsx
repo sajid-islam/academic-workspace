@@ -23,12 +23,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useWorkspace } from "@/context/workspace-context";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { Notice, NoticePriority } from "@/types/notice";
 
 export default function NoticesPage() {
   const { notices } = useWorkspace();
-  const { toast } = useToast();
 
   const [searchQuery, setSearchQuery] = React.useState("");
   const [selectedPriority, setSelectedPriority] = React.useState<string>("all");
@@ -244,11 +243,7 @@ export default function NoticesPage() {
                             size="xs"
                             variant="outline"
                             onClick={() => {
-                              toast({
-                                title: "Downloading Attachment",
-                                description: `Downloaded ${att.name}`,
-                                type: "success",
-                              });
+                              toast.success("Downloading Attachment", { description: `Downloaded ${att.name}` });
                             }}
                             className="gap-1 shrink-0"
                           >

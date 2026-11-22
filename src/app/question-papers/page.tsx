@@ -4,7 +4,7 @@ import { AddPaperDialog } from "@/components/question-papers/add-paper-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import {
   BookmarkSimple,
@@ -19,7 +19,6 @@ import * as React from "react";
 
 export default function QuestionPapersPage() {
   const { questionPapers, subjects, isBookmarked, toggleBookmark } = useWorkspace();
-  const { toast } = useToast();
 
   const [isAddOpen, setIsAddOpen] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -218,10 +217,7 @@ export default function QuestionPapersPage() {
                         onClick={(e) => {
                           e.preventDefault();
                           const next = toggleBookmark(paper.id, "paper");
-                          toast({
-                            title: next ? "Bookmarked paper" : "Removed bookmark",
-                            type: "info",
-                          });
+                          toast.info(next ? "Bookmarked paper" : "Removed bookmark");
                         }}
                         className="text-muted-foreground hover:text-primary transition-colors p-1 rounded hover:bg-muted"
                         aria-label="Bookmark paper"

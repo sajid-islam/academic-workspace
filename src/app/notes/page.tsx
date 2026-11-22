@@ -5,7 +5,7 @@ import { NoteViewerDialog } from "@/components/notes/note-viewer-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/toast";
+import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import { Note } from "@/types/note";
 import {
@@ -20,7 +20,6 @@ import * as React from "react";
 
 export default function NotesPage() {
   const { notes, subjects, isBookmarked, toggleBookmark } = useWorkspace();
-  const { toast } = useToast();
 
   const [isAddOpen, setIsAddOpen] = React.useState(false);
   const [selectedNote, setSelectedNote] = React.useState<Note | null>(null);
@@ -175,10 +174,7 @@ export default function NotesPage() {
                     <button
                       onClick={() => {
                         const next = toggleBookmark(note.id, "note");
-                        toast({
-                          title: next ? "Bookmarked note" : "Removed bookmark",
-                          type: "info",
-                        });
+                        toast.info(next ? "Bookmarked note" : "Removed bookmark");
                       }}
                       className="p-1 rounded text-muted-foreground hover:text-primary transition-colors"
                       aria-label="Bookmark note"
@@ -222,11 +218,7 @@ export default function NotesPage() {
                       variant="outline"
                       size="icon-xs"
                       onClick={() => {
-                        toast({
-                          title: "Downloading Document",
-                          description: `Downloading "${note.title}" (${note.fileSize})`,
-                          type: "success",
-                        });
+                        toast.success("Downloading Document", { description: `Downloading "${note.title}" (${note.fileSize})` });
                       }}
                       title="Download Note"
                     >

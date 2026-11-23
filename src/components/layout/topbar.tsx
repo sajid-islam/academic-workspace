@@ -48,14 +48,13 @@ const pathTitles: Record<string, { title: string; category?: string }> = {
   "/admin/notices": { title: "Publish Notices", category: "Admin" },
 };
 
-const setInitialSoundStateValue = () => {
-  return localStorage.getItem("sound") === "true";
-};
-
 export function Topbar({ onOpenMobileNav }: { onOpenMobileNav?: () => void }) {
   const pathname = usePathname();
   const { student } = useWorkspace();
-  const [soundOn, setSoundOn] = useState<boolean>(setInitialSoundStateValue);
+  const [soundOn, setSoundOn] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("sound") === "true";
+  });
 
   const currentRouteMeta = pathTitles[pathname] || {
     title: pathname.split("/").pop()?.replace(/-/g, " ") || "Overview",

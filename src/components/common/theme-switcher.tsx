@@ -1,6 +1,6 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/redux/hook.redux";
-import { changeTheme, ThemeState } from "@/redux/theme/theme.slice";
+import { ThemeState, changeTheme } from "@/redux/theme/theme.slice";
 import { LaptopIcon, MoonIcon, SunIcon } from "@phosphor-icons/react";
 import { toast } from "@yusufceng1z/ding-react";
 import { useEffect } from "react";
@@ -25,6 +25,10 @@ const ThemeSwitcher = () => {
 
     root.classList.remove("light", "dark");
 
+    root.classList.remove("theme-light", "theme-dark", "theme-system");
+
+    root.classList.add(`theme-${targetTheme}`);
+
     if (targetTheme === "system") {
       const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
@@ -43,7 +47,7 @@ const ThemeSwitcher = () => {
 
   // Load saved preference
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as ThemeState["mode"];
+    const savedTheme = (localStorage.getItem("theme") ?? "system") as ThemeState["mode"];
 
     dispatchTheme(changeTheme(savedTheme));
 
@@ -64,9 +68,11 @@ const ThemeSwitcher = () => {
           className="rounded-lg text-muted-foreground hover:text-foreground"
           aria-label="Toggle theme"
         >
-          {theme === "light" && <SunIcon className="size-4" />}
-          {theme === "dark" && <MoonIcon className="size-4" />}
-          {theme === "system" && <LaptopIcon className="size-4" />}
+          <span className="relative">
+            <SunIcon className="size-4 in-[.theme-light]:block hidden" />
+            <MoonIcon className="size-4 in-[.theme-dark]:block hidden" />
+            <LaptopIcon className="size-4 in-[.theme-system]:block hidden" />
+          </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-36">

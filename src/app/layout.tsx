@@ -2,6 +2,7 @@ import Providers from "@/components/common/providers";
 import { AppShell } from "@/components/layout/app-shell";
 import { AppToaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
+import { themeScript } from "@/scripts/theme.script";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -24,6 +25,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
       className={cn("h-full", "antialiased", inter.variable, inter.className)}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <Providers>
           <AppToaster />

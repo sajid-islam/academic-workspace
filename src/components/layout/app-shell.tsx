@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import * as React from "react";
-import { CommandSearchDialog } from "./command-search-dialog";
 import { MobileNav } from "./mobile-nav";
 import { Sidebar } from "./sidebar";
 import { Topbar } from "./topbar";
@@ -18,7 +17,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     return (
       <main className="min-h-screen flex flex-col justify-center items-center  bg-background">
         {children}
-        <CommandSearchDialog />
       </main>
     );
   }
@@ -39,9 +37,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* Mobile Navigation & Drawer */}
       <MobileNav isMoreOpen={isMobileNavOpen} setIsMoreOpen={setIsMobileNavOpen} />
-
-      {/* Global ⌘K Search Modal */}
-      <CommandSearchDialog />
     </div>
   );
 }

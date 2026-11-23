@@ -1,7 +1,6 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,22 +11,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { toast } from "@yusufceng1z/ding-react";
 import { useWorkspace } from "@/context/workspace-context";
 import {
-  Bell,
   GearSix,
   Laptop,
   List,
-  MagnifyingGlass,
   Moon,
   ShieldCheck,
   SignOut,
+  SpeakerHighIcon,
+  SpeakerSlashIcon,
   Sun,
   User,
 } from "@phosphor-icons/react";
+import { toast } from "@yusufceng1z/ding-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const pathTitles: Record<string, { title: string; category?: string }> = {
   "/": { title: "Dashboard", category: "Workspace" },
@@ -52,16 +52,33 @@ const pathTitles: Record<string, { title: string; category?: string }> = {
   "/admin/notices": { title: "Publish Notices", category: "Admin" },
 };
 
+const setInitialSoundStateValue = () => {
+  return localStorage.getItem("sound") === "true";
+};
+
 export function Topbar({ onOpenMobileNav }: { onOpenMobileNav?: () => void }) {
   const pathname = usePathname();
-  const { theme, setTheme, setIsSearchOpen, student, notices } = useWorkspace();
+  const { theme, setTheme, student } = useWorkspace();
+  const [soundOn, setSoundOn] = useState<boolean>(setInitialSoundStateValue);
 
   const currentRouteMeta = pathTitles[pathname] || {
     title: pathname.split("/").pop()?.replace(/-/g, " ") || "Overview",
     category: pathname.startsWith("/admin") ? "Administration" : "Workspace",
   };
 
-  const urgentNotices = notices.filter((n) => n.priority === "Urgent" || n.isPinned);
+  const handleSoundOn = () => {
+    setSoundOn((prev) => {
+      const newValue = !prev;
+      localStorage.setItem("sound", String(newValue));
+
+      window.dispatchEvent(
+        new CustomEvent("sound-change", {
+          detail: newValue,
+        }),
+      );
+      return newValue;
+    });
+  };
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-background/85 px-4 sm:px-6 backdrop-blur-md">
@@ -93,79 +110,14 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav?: () => void }) {
 
       {/* Right: Search + Notifications + Theme + User Menu */}
       <div className="flex items-center gap-2 sm:gap-3">
-        {/* Global Search Button */}
-        <button
-          onClick={() => setIsSearchOpen(true)}
-          className="flex items-center gap-2 rounded-lg border border-border bg-muted/40 px-2.5 sm:px-3 py-1.5 text-xs text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-        >
-          <MagnifyingGlass className="size-4 shrink-0" />
-          <span className="hidden md:inline">Search anything...</span>
-          <kbd className="hidden sm:inline-flex h-4 items-center gap-0.5 rounded border border-border bg-background px-1 text-[10px] text-muted-foreground">
-            ⌘K
-          </kbd>
-        </button>
-
         {/* Notifications Popover */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              className="relative rounded-lg text-muted-foreground hover:text-foreground"
-              aria-label="View notifications"
-            >
-              <Bell className="size-4" />
-              {urgentNotices.length > 0 && (
-                <span className="absolute top-1 right-1 size-2 rounded-full bg-rose-500 ring-2 ring-background" />
-              )}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-80 p-2">
-            <div className="flex items-center justify-between px-2 py-1.5">
-              <DropdownMenuLabel className="p-0 text-xs font-semibold">
-                Department Notices
-              </DropdownMenuLabel>
-              <Badge variant="subtle" className="text-[10px]">
-                {notices.length} updates
-              </Badge>
-            </div>
-            <DropdownMenuSeparator />
-            <div className="space-y-1.5 py-1">
-              {notices.slice(0, 3).map((notice) => (
-                <Link
-                  key={notice.id}
-                  href="/notices"
-                  className="block p-2 rounded-md hover:bg-muted/70 transition-colors text-left"
-                >
-                  <div className="flex items-center justify-between gap-1">
-                    <span className="text-xs font-medium text-foreground truncate">
-                      {notice.title}
-                    </span>
-                    <Badge
-                      variant={notice.priority === "Urgent" ? "destructive" : "secondary"}
-                      className="text-[10px] shrink-0"
-                    >
-                      {notice.priority}
-                    </Badge>
-                  </div>
-                  <p className="text-[11px] text-muted-foreground line-clamp-1 mt-0.5">
-                    {notice.content}
-                  </p>
-                  <span className="text-[10px] text-muted-foreground/80 mt-1 block">
-                    {notice.date} · {notice.author}
-                  </span>
-                </Link>
-              ))}
-            </div>
-            <DropdownMenuSeparator />
-            <Link
-              href="/notices"
-              className="block w-full py-1.5 text-center text-xs font-medium text-primary hover:underline"
-            >
-              View all department notices →
-            </Link>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <button onClick={handleSoundOn} className="text-muted-foreground hover:text-foreground">
+          {soundOn ? (
+            <SpeakerHighIcon className="size-4" />
+          ) : (
+            <SpeakerSlashIcon className="size-4" />
+          )}
+        </button>
 
         {/* Theme Toggle Dropdown */}
         <DropdownMenu>

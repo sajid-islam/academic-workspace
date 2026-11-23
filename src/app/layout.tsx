@@ -1,6 +1,6 @@
+import Providers from "@/components/common/providers";
 import { AppShell } from "@/components/layout/app-shell";
 import { AppToaster } from "@/components/ui/toaster";
-import { WorkspaceProvider } from "@/context/workspace-context";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -25,10 +25,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={cn("h-full", "antialiased", inter.variable, inter.className)}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <WorkspaceProvider>
+        <Providers>
           <AppToaster />
           <AppShell>{children}</AppShell>
-        </WorkspaceProvider>
+        </Providers>
       </body>
     </html>
   );

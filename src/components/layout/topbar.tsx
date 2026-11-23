@@ -7,27 +7,23 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useWorkspace } from "@/context/workspace-context";
 import {
   GearSix,
-  Laptop,
   List,
-  Moon,
   ShieldCheck,
   SignOut,
   SpeakerHighIcon,
   SpeakerSlashIcon,
-  Sun,
   User,
 } from "@phosphor-icons/react";
-import { toast } from "@yusufceng1z/ding-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import ThemeSwitcher from "../common/theme-switcher";
 
 const pathTitles: Record<string, { title: string; category?: string }> = {
   "/": { title: "Dashboard", category: "Workspace" },
@@ -58,7 +54,7 @@ const setInitialSoundStateValue = () => {
 
 export function Topbar({ onOpenMobileNav }: { onOpenMobileNav?: () => void }) {
   const pathname = usePathname();
-  const { theme, setTheme, student } = useWorkspace();
+  const { student } = useWorkspace();
   const [soundOn, setSoundOn] = useState<boolean>(setInitialSoundStateValue);
 
   const currentRouteMeta = pathTitles[pathname] || {
@@ -120,56 +116,7 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav?: () => void }) {
         </button>
 
         {/* Theme Toggle Dropdown */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              className="rounded-lg text-muted-foreground hover:text-foreground"
-              aria-label="Toggle theme"
-            >
-              {theme === "light" && <Sun className="size-4" />}
-              {theme === "dark" && <Moon className="size-4" />}
-              {theme === "system" && <Laptop className="size-4" />}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-36">
-            <DropdownMenuLabel className="text-xs">Theme</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => {
-                setTheme("light");
-                toast.info("Light mode enabled");
-              }}
-              className="gap-2 text-xs"
-            >
-              <Sun className="size-4 text-amber-500" />
-              <span>Light</span>
-              {theme === "light" && <span className="ml-auto text-[10px]">✓</span>}
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => {
-                setTheme("dark");
-                toast.info("Dark mode enabled");
-              }}
-              className="gap-2 text-xs"
-            >
-              <Moon className="size-4 text-indigo-400" />
-              <span>Dark</span>
-              {theme === "dark" && <span className="ml-auto text-[10px]">✓</span>}
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => {
-                setTheme("system");
-                toast.info("System theme synced");
-              }}
-              className="gap-2 text-xs"
-            >
-              <Laptop className="size-4 text-muted-foreground" />
-              <span>System</span>
-              {theme === "system" && <span className="ml-auto text-[10px]">✓</span>}
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <ThemeSwitcher />
 
         {/* User Profile Avatar Dropdown */}
         <DropdownMenu>

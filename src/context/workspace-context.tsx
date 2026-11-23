@@ -1,22 +1,22 @@
 "use client";
 
-import * as React from "react";
-import { QuestionPaper } from "@/types/question-paper";
-import { Note } from "@/types/note";
-import { Resource } from "@/types/resource";
-import { Notice } from "@/types/notice";
-import { Student } from "@/types/student";
-import { ClassSlot } from "@/types/routine";
-import { Exam } from "@/types/exam";
-import { Subject } from "@/types/subject";
-import { initialQuestionPapers } from "@/data/question-papers";
-import { initialNotes } from "@/data/notes";
-import { initialResources } from "@/data/resources";
-import { initialNotices } from "@/data/notices";
-import { initialStudents, currentStudent } from "@/data/students";
-import { initialRoutine } from "@/data/routine";
 import { initialExams } from "@/data/exams";
+import { initialNotes } from "@/data/notes";
+import { initialNotices } from "@/data/notices";
+import { initialQuestionPapers } from "@/data/question-papers";
+import { initialResources } from "@/data/resources";
+import { initialRoutine } from "@/data/routine";
+import { currentStudent, initialStudents } from "@/data/students";
 import { initialSubjects } from "@/data/subjects";
+import { Exam } from "@/types/exam";
+import { Note } from "@/types/note";
+import { Notice } from "@/types/notice";
+import { QuestionPaper } from "@/types/question-paper";
+import { Resource } from "@/types/resource";
+import { ClassSlot } from "@/types/routine";
+import { Student } from "@/types/student";
+import { Subject } from "@/types/subject";
+import * as React from "react";
 
 export type ThemeMode = "light" | "dark" | "system";
 
@@ -27,20 +27,14 @@ export interface BookmarkItem {
 }
 
 interface WorkspaceContextType {
-  // Theme
-  theme: ThemeMode;
-  setTheme: (theme: ThemeMode) => void;
-
-  // Global search modal
-  isSearchOpen: boolean;
-  setIsSearchOpen: (open: boolean) => void;
-
   // Current student
   student: Student;
 
   // Question Papers
   questionPapers: QuestionPaper[];
-  addQuestionPaper: (paper: Omit<QuestionPaper, "id" | "uploadedAt" | "views" | "downloads">) => QuestionPaper;
+  addQuestionPaper: (
+    paper: Omit<QuestionPaper, "id" | "uploadedAt" | "views" | "downloads">,
+  ) => QuestionPaper;
   deleteQuestionPaper: (id: string) => void;
 
   // Notes
@@ -89,14 +83,9 @@ interface WorkspaceContextType {
 const WorkspaceContext = React.createContext<WorkspaceContextType | undefined>(undefined);
 
 export function WorkspaceProvider({ children }: { children: React.ReactNode }) {
-  // Theme state
-  const [theme, setThemeState] = React.useState<ThemeMode>("light");
-
-  // Global search modal
-  const [isSearchOpen, setIsSearchOpen] = React.useState<boolean>(false);
-
   // Core collections
-  const [questionPapers, setQuestionPapers] = React.useState<QuestionPaper[]>(initialQuestionPapers);
+  const [questionPapers, setQuestionPapers] =
+    React.useState<QuestionPaper[]>(initialQuestionPapers);
   const [notes, setNotes] = React.useState<Note[]>(initialNotes);
   const [resources, setResources] = React.useState<Resource[]>(initialResources);
   const [notices, setNotices] = React.useState<Notice[]>(initialNotices);
@@ -111,43 +100,6 @@ export function WorkspaceProvider({ children }: { children: React.ReactNode }) {
     { id: "note-01", type: "note", createdAt: "2026-09-22" },
     { id: "res-01", type: "resource", createdAt: "2026-09-24" },
   ]);
-
-  // Sync theme with document element and localStorage
-  React.useEffect(() => {
-    const savedTheme = (localStorage.getItem("academic-workspace-theme") as ThemeMode) || "light";
-    setThemeState(savedTheme);
-    applyThemeClass(savedTheme);
-  }, []);
-
-  const applyThemeClass = (targetTheme: ThemeMode) => {
-    const root = document.documentElement;
-    root.classList.remove("light", "dark");
-
-    if (targetTheme === "system") {
-      const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      root.classList.add(systemDark ? "dark" : "light");
-    } else {
-      root.classList.add(targetTheme);
-    }
-  };
-
-  const setTheme = (newTheme: ThemeMode) => {
-    setThemeState(newTheme);
-    localStorage.setItem("academic-workspace-theme", newTheme);
-    applyThemeClass(newTheme);
-  };
-
-  // Keyboard shortcut listener for Cmd+K / Ctrl+K
-  React.useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setIsSearchOpen((prev) => !prev);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
   // Bookmark actions
   const toggleBookmark = (id: string, type: "paper" | "note" | "resource") => {
@@ -170,7 +122,7 @@ export function WorkspaceProvider({ children }: { children: React.ReactNode }) {
 
   // Question Papers actions
   const addQuestionPaper = (
-    paperData: Omit<QuestionPaper, "id" | "uploadedAt" | "views" | "downloads">
+    paperData: Omit<QuestionPaper, "id" | "uploadedAt" | "views" | "downloads">,
   ): QuestionPaper => {
     const newPaper: QuestionPaper = {
       ...paperData,
@@ -190,9 +142,7 @@ export function WorkspaceProvider({ children }: { children: React.ReactNode }) {
   };
 
   // Notes actions
-  const addNote = (
-    noteData: Omit<Note, "id" | "date" | "downloadsCount">
-  ): Note => {
+  const addNote = (noteData: Omit<Note, "id" | "date" | "downloadsCount">): Note => {
     const newNote: Note = {
       ...noteData,
       id: `note-${Date.now().toString(36)}`,
@@ -210,9 +160,7 @@ export function WorkspaceProvider({ children }: { children: React.ReactNode }) {
   };
 
   // Resources actions
-  const addResource = (
-    resData: Omit<Resource, "id" | "date">
-  ): Resource => {
+  const addResource = (resData: Omit<Resource, "id" | "date">): Resource => {
     const newResource: Resource = {
       ...resData,
       id: `res-${Date.now().toString(36)}`,
@@ -229,9 +177,7 @@ export function WorkspaceProvider({ children }: { children: React.ReactNode }) {
   };
 
   // Notices actions
-  const addNotice = (
-    noticeData: Omit<Notice, "id" | "date">
-  ): Notice => {
+  const addNotice = (noticeData: Omit<Notice, "id" | "date">): Notice => {
     const newNotice: Notice = {
       ...noticeData,
       id: `not-${Date.now().toString(36)}`,
@@ -292,10 +238,6 @@ export function WorkspaceProvider({ children }: { children: React.ReactNode }) {
   return (
     <WorkspaceContext.Provider
       value={{
-        theme,
-        setTheme,
-        isSearchOpen,
-        setIsSearchOpen,
         student: currentStudent,
         questionPapers,
         addQuestionPaper,

@@ -3,13 +3,17 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { toast } from "@yusufceng1z/ding-react";
 import { ThemeMode, useWorkspace } from "@/context/workspace-context";
+import { useAppDispatch, useAppSelector } from "@/redux/hook.redux";
+import { changeTheme } from "@/redux/theme/theme.slice";
 import { Bell, Laptop, LockKey, Moon, Sun, User } from "@phosphor-icons/react";
+import { toast } from "@yusufceng1z/ding-react";
 import * as React from "react";
 
 export default function SettingsPage() {
-  const { student, theme, setTheme } = useWorkspace();
+  const { student } = useWorkspace();
+  const theme = useAppSelector((state) => state.theme.mode);
+  const dispatchTheme = useAppDispatch();
 
   // Account state
   const [name, setName] = React.useState(student.name);
@@ -36,10 +40,14 @@ export default function SettingsPage() {
   const handleUpdatePassword = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newPassword || newPassword !== confirmPassword) {
-      toast.error("Password Mismatch", { description: "New password and confirmation do not match." });
+      toast.error("Password Mismatch", {
+        description: "New password and confirmation do not match.",
+      });
       return;
     }
-    toast.success("Password Changed", { description: "Your security credentials have been updated." });
+    toast.success("Password Changed", {
+      description: "Your security credentials have been updated.",
+    });
     setCurrentPassword("");
     setNewPassword("");
     setConfirmPassword("");
@@ -158,7 +166,7 @@ export default function SettingsPage() {
               <button
                 key={item.id}
                 onClick={() => {
-                  setTheme(item.id);
+                  dispatchTheme(changeTheme(item.id));
                   toast.info(`${item.label} Activated`);
                 }}
                 className={`p-4 rounded-xl border text-left transition-all ${

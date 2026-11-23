@@ -195,3 +195,11 @@
 ::-webkit-scrollbar-thumb:hover {
   background: oklch(var(--muted-foreground) / 0.5);
 }
+
+/* Disable all animations and transitions during theme change */
+html.disable-transitions *,
+html.disable-transitions *::before,
+html.disable-transitions *::after {
+  transition: none !important;
+  animation: none !important;
+}

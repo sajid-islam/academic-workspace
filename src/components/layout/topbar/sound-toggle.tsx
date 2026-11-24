@@ -12,7 +12,12 @@ export function SoundToggle() {
   const handleToggle = () => {
     setSoundOn((prev) => {
       const newValue = !prev;
+      // set local storage
       localStorage.setItem("sound", String(newValue));
+      // Apply sound class
+      document.documentElement.classList.remove("sound-true", "sound-false");
+      document.documentElement.classList.add("sound-" + newValue);
+      // dispatch event
       window.dispatchEvent(new CustomEvent("sound-change", { detail: newValue }));
       return newValue;
     });
@@ -25,7 +30,10 @@ export function SoundToggle() {
       aria-label={soundOn ? "Mute notifications" : "Unmute notifications"}
       className="text-muted-foreground hover:text-foreground transition-colors"
     >
-      {soundOn ? <SpeakerHighIcon className="size-4" /> : <SpeakerSlashIcon className="size-4" />}
+      <span className="relative">
+        <SpeakerHighIcon className="size-4 in-[.sound-true]:block hidden" />
+        <SpeakerSlashIcon className="size-4 in-[.sound-false]:block hidden" />
+      </span>
     </button>
   );
 }

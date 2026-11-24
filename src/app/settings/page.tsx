@@ -2,56 +2,21 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
-import { ThemeMode, useWorkspace } from "@/context/workspace-context";
+import { ThemeMode } from "@/context/workspace-context";
+import { useGetMeQuery } from "@/redux/apis/user/user.slice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook.redux";
 import { changeTheme } from "@/redux/stores/theme/theme.slice";
-import { Bell, Laptop, LockKey, Moon, Sun, User } from "@phosphor-icons/react";
+import { LaptopIcon, LockKeyIcon, MoonIcon, SunIcon, UserIcon } from "@phosphor-icons/react";
 import { toast } from "@yusufceng1z/ding-react";
-import * as React from "react";
+import SettingPageSkeleton from "./components/settings-page.skeleton";
 
 export default function SettingsPage() {
-  const { student } = useWorkspace();
+  const { data: user, isLoading } = useGetMeQuery();
   const theme = useAppSelector((state) => state.theme.mode);
   const dispatchTheme = useAppDispatch();
-
-  // Account state
-  const [name, setName] = React.useState(student.name);
-  const [email, setEmail] = React.useState(student.email);
-  const [roll, setRoll] = React.useState(student.roll);
-  const [phone, setPhone] = React.useState(student.phone || "+880 1712-345678");
-
-  // Notifications state
-  const [notifyPapers, setNotifyPapers] = React.useState(true);
-  const [notifyNotes, setNotifyNotes] = React.useState(true);
-  const [notifyResources, setNotifyResources] = React.useState(false);
-  const [notifyNotices, setNotifyNotices] = React.useState(true);
-
-  // Security password state
-  const [currentPassword, setCurrentPassword] = React.useState("");
-  const [newPassword, setNewPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
-
-  const handleSaveAccount = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("Account Updated", { description: "Profile changes saved successfully." });
-  };
-
-  const handleUpdatePassword = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newPassword || newPassword !== confirmPassword) {
-      toast.error("Password Mismatch", {
-        description: "New password and confirmation do not match.",
-      });
-      return;
-    }
-    toast.success("Password Changed", {
-      description: "Your security credentials have been updated.",
-    });
-    setCurrentPassword("");
-    setNewPassword("");
-    setConfirmPassword("");
-  };
+  if (isLoading) {
+    return <SettingPageSkeleton />;
+  }
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in-50 duration-300">
@@ -66,7 +31,7 @@ export default function SettingsPage() {
       {/* 1. Account Settings */}
       <div className="p-6 rounded-2xl border border-border/80 bg-card space-y-5">
         <div className="flex items-center gap-2.5 pb-3 border-b border-border/60">
-          <User className="size-5 text-primary" />
+          <UserIcon className="size-5 text-primary" />
           <div>
             <h2 className="text-sm font-bold text-foreground">Account Information</h2>
             <p className="text-xs text-muted-foreground">
@@ -75,23 +40,27 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <form onSubmit={handleSaveAccount} className="space-y-4">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            toast.warning("This feature is unavailable for now");
+          }}
+          className="space-y-4"
+        >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-foreground">Full Name</label>
-              <Input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="h-9 text-xs"
-              />
+              <Input value={user?.name} disabled className="h-9 text-xs" />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-foreground">Phone Number</label>
+              <Input value={user?.nickname} disabled className="h-9 text-xs" />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-foreground">
-                Student ID / Roll Number
-              </label>
+              <label className="text-xs font-semibold text-foreground">Student ID</label>
               <Input
-                value={roll}
+                value={user?.student_id}
                 disabled
                 className="h-9 text-xs bg-muted/50 cursor-not-allowed opacity-80"
               />
@@ -100,21 +69,7 @@ export default function SettingsPage() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-foreground">University Email</label>
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="h-9 text-xs"
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-foreground">Phone Number</label>
-              <Input
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="h-9 text-xs"
-              />
+              <Input type="email" value={user?.email} disabled className="h-9 text-xs" />
             </div>
           </div>
 
@@ -129,7 +84,7 @@ export default function SettingsPage() {
       {/* 2. Appearance Theme */}
       <div className="p-6 rounded-2xl border border-border/80 bg-card space-y-4">
         <div className="flex items-center gap-2.5 pb-3 border-b border-border/60">
-          <Sun className="size-5 text-amber-500" />
+          <SunIcon className="size-5 text-amber-500" />
           <div>
             <h2 className="text-sm font-bold text-foreground">Appearance & Theme</h2>
             <p className="text-xs text-muted-foreground">
@@ -142,21 +97,21 @@ export default function SettingsPage() {
           {[
             {
               id: "light" as ThemeMode,
-              label: "Light Mode",
+              label: "Light",
               desc: "Clean white & slate surfaces",
-              icon: Sun,
+              icon: SunIcon,
             },
             {
               id: "dark" as ThemeMode,
-              label: "Dark Mode",
+              label: "Dark",
               desc: "Deep contrast indigo night",
-              icon: Moon,
+              icon: MoonIcon,
             },
             {
               id: "system" as ThemeMode,
-              label: "System Match",
+              label: "System",
               desc: "Follows OS device preference",
-              icon: Laptop,
+              icon: LaptopIcon,
             },
           ].map((item) => {
             const Icon = item.icon;
@@ -184,7 +139,9 @@ export default function SettingsPage() {
                   )}
                 </div>
                 <h3 className="text-xs font-bold text-foreground mt-3">{item.label}</h3>
-                <p className="text-[11px] text-muted-foreground mt-0.5">{item.desc}</p>
+                <p className="text-[11px] text-muted-foreground mt-0.5 hidden sm:block">
+                  {item.desc}
+                </p>
               </button>
             );
           })}
@@ -192,9 +149,9 @@ export default function SettingsPage() {
       </div>
 
       {/* 3. Notifications */}
-      <div className="p-6 rounded-2xl border border-border/80 bg-card space-y-4">
+      {/* <div className="p-6 rounded-2xl border border-border/80 bg-card space-y-4">
         <div className="flex items-center gap-2.5 pb-3 border-b border-border/60">
-          <Bell className="size-5 text-primary" />
+          <BellIcon className="size-5 text-primary" />
           <div>
             <h2 className="text-sm font-bold text-foreground">Notification Preferences</h2>
             <p className="text-xs text-muted-foreground">
@@ -250,12 +207,12 @@ export default function SettingsPage() {
             <Switch checked={notifyNotices} onCheckedChange={setNotifyNotices} />
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* 4. Security & Password */}
       <div className="p-6 rounded-2xl border border-border/80 bg-card space-y-4">
         <div className="flex items-center gap-2.5 pb-3 border-b border-border/60">
-          <LockKey className="size-5 text-primary" />
+          <LockKeyIcon className="size-5 text-primary" />
           <div>
             <h2 className="text-sm font-bold text-foreground">Security & Password</h2>
             <p className="text-xs text-muted-foreground">
@@ -264,16 +221,16 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <form onSubmit={handleUpdatePassword} className="space-y-4">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            toast.warning("This feature is unavailable for now");
+          }}
+          className="space-y-4"
+        >
           <div className="space-y-1.5">
             <label className="text-xs font-semibold text-foreground">Current Password</label>
-            <Input
-              type="password"
-              placeholder="••••••••"
-              value={currentPassword}
-              onChange={(e) => setCurrentPassword(e.target.value)}
-              className="h-9 text-xs"
-            />
+            <Input type="password" disabled placeholder="••••••••" className="h-9 text-xs" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -281,9 +238,8 @@ export default function SettingsPage() {
               <label className="text-xs font-semibold text-foreground">New Password</label>
               <Input
                 type="password"
+                disabled
                 placeholder="At least 8 characters"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
                 className="h-9 text-xs"
               />
             </div>
@@ -292,9 +248,8 @@ export default function SettingsPage() {
               <label className="text-xs font-semibold text-foreground">Confirm New Password</label>
               <Input
                 type="password"
+                disabled
                 placeholder="Repeat new password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
                 className="h-9 text-xs"
               />
             </div>

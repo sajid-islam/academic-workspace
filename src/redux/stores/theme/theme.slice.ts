@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
+import { applyThemeClass } from "./theme-utils";
 
 export interface ThemeState {
   mode: "light" | "dark" | "system";
@@ -15,6 +16,7 @@ export const themeSlice = createSlice({
   reducers: {
     changeTheme: (state, action) => {
       state.mode = action.payload;
+      applyThemeClass(action.payload);
       localStorage.setItem("theme", action.payload);
     },
   },

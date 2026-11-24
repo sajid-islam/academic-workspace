@@ -1,6 +1,6 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/redux/hook.redux";
-import { ThemeState, changeTheme } from "@/redux/theme/theme.slice";
+import { ThemeState, changeTheme } from "@/redux/stores/theme/theme.slice";
 import { LaptopIcon, MoonIcon, SunIcon } from "@phosphor-icons/react";
 import { toast } from "@yusufceng1z/ding-react";
 import { useEffect } from "react";

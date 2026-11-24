@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { ThemeMode, useWorkspace } from "@/context/workspace-context";
 import { useAppDispatch, useAppSelector } from "@/redux/hook.redux";
-import { changeTheme } from "@/redux/theme/theme.slice";
+import { changeTheme } from "@/redux/stores/theme/theme.slice";
 import { Bell, Laptop, LockKey, Moon, Sun, User } from "@phosphor-icons/react";
 import { toast } from "@yusufceng1z/ding-react";
 import * as React from "react";

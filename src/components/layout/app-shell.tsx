@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import * as React from "react";
 import { MobileNav } from "./mobile-nav";
 import { Sidebar } from "./sidebar";
-import { Topbar } from "./topbar";
+import { Topbar } from "./topbar/topbar";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

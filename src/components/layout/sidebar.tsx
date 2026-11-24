@@ -1,20 +1,20 @@
 "use client";
 
 import { adminNavigation, studentNavigation } from "@/config/navigation";
-import { useWorkspace } from "@/context/workspace-context";
 import { WORKSPACE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { ArrowSquareOut, GraduationCap, House, ShieldCheck } from "@phosphor-icons/react";
+import { useGetMeQuery } from "@/redux/apis/user/user.slice";
+import { GraduationCapIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 interface SidebarProps {
   isAdmin?: boolean;
 }
 
 export function Sidebar({ isAdmin = false }: SidebarProps) {
   const pathname = usePathname();
-  const { student } = useWorkspace();
+  const { data: user } = useGetMeQuery();
   const navGroups = isAdmin ? adminNavigation : studentNavigation;
 
   return (
@@ -22,7 +22,7 @@ export function Sidebar({ isAdmin = false }: SidebarProps) {
       {/* Workspace Brand Header */}
       <div className="flex items-center gap-3 px-4 h-16 border-b border-sidebar-border">
         <div className="size-9 rounded-lg bg-primary flex items-center justify-center text-primary-foreground shadow-xs shrink-0">
-          <GraduationCap className="size-5" weight="fill" />
+          <GraduationCapIcon className="size-5" weight="fill" />
         </div>
         <div className="flex flex-col min-w-0">
           <div className="flex items-center gap-1.5">
@@ -103,41 +103,21 @@ export function Sidebar({ isAdmin = false }: SidebarProps) {
 
       {/* Mode Switcher / Admin Quick Switch */}
       <div className="p-3 border-t border-sidebar-border bg-sidebar/50">
-        {isAdmin ? (
-          <Link
-            href="/"
-            className="flex items-center justify-between w-full px-3 py-2 rounded-lg border border-border bg-background text-xs font-medium text-foreground hover:bg-muted transition-colors"
-          >
-            <div className="flex items-center gap-2">
-              <House className="size-4 text-primary" />
-              <span>Back to Student Portal</span>
-            </div>
-            <ArrowSquareOut className="size-3.5 text-muted-foreground" />
-          </Link>
-        ) : (
-          <Link
-            href="/admin"
-            className="flex items-center justify-between w-full px-3 py-2 rounded-lg border border-border/70 bg-background/50 hover:bg-background text-xs font-medium text-foreground transition-colors group"
-          >
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="size-4 text-amber-600 dark:text-amber-400" />
-              <span>Admin Management</span>
-            </div>
-            <span className="text-[10px] text-muted-foreground group-hover:text-primary font-mono">
-              Switch →
-            </span>
-          </Link>
-        )}
-
         {/* User Card Pill */}
-        <div className="mt-2 flex items-center gap-2.5 px-2 py-1.5 rounded-md bg-muted/30">
-          <div className="size-7 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xs font-bold shrink-0">
-            {student.name.charAt(0)}
-          </div>
+        <div className=" flex items-center gap-2.5 px-2 pb-1.5 rounded-md bg-muted/30">
+          <button
+            className="flex items-center gap-2 rounded-full focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            aria-label="User profile menu"
+          >
+            <Avatar className="size-8 rounded-sm">
+              <AvatarImage src={user?.user_image} alt={user?.name} />
+              <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
+            </Avatar>
+          </button>
           <div className="flex flex-col min-w-0">
-            <span className="text-xs font-medium truncate text-foreground">{student.name}</span>
+            <span className="text-xs font-medium truncate text-foreground">{user?.name}</span>
             <span className="text-[10px] text-muted-foreground truncate">
-              Roll: {student.roll} · Sec {student.section}
+              ID: {user?.student_id} · Roll {user?.roll}
             </span>
           </div>
         </div>
